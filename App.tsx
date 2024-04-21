@@ -4,7 +4,7 @@ import { SafeAreaFrameContext, SafeAreaView } from 'react-native-safe-area-conte
 import MainStack from './stackPantallas/mainStack';
 
 
-
+  
 function App() {
   return (
    <SafeAreaView style = {{flex:1}}>

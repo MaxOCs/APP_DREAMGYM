@@ -3,12 +3,10 @@ import{Text,TextInput,StyleSheet,View} from 'react-native';
 import colors from "../styles/colores";
 import CustomText from "../componentes/InputText";
 
-const Login = ({ route }) => {
+const Registro = ({ route }) => {
     return (
       <View>
-        {/*<Text style ={styles.texto}>This is {route.params.name}'s profile</Text>*/}
-        <Text style ={styles.texto}>NOMBRE</Text>
-        <CustomText/>
+        <Text style ={styles.texto}>NOMBRE</Text >
         <TextInput style = {styles.input}></TextInput>
         <Text style ={styles.texto} >EDAD</Text>
         <TextInput style = {styles.input}></TextInput>
@@ -39,4 +37,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default Login
+export default Registro;
