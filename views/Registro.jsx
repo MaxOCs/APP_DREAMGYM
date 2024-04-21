@@ -1,9 +1,10 @@
 import React from "react";
 import{Text,TextInput,StyleSheet,View} from 'react-native';
+import BotonPrincipal from "../componentes/botonPrincipal";
 import colors from "../styles/colores";
 import CustomText from "../componentes/InputText";
 
-const Registro = ({ route }) => {
+const Registro = ({ navigation }) => {
     return (
       <View>
         <Text style ={styles.texto}>NOMBRE</Text >
@@ -12,8 +13,10 @@ const Registro = ({ route }) => {
         <TextInput style = {styles.input}></TextInput>
         <Text style ={styles.texto}>PESO</Text>
         <TextInput style = {styles.input}></TextInput>
+        <BotonPrincipal onPress={() =>navigation.navigate('Bienvenido')} title="Registrarme"/> 
 
       </View>
+      
       
     );
   };
