@@ -19,6 +19,7 @@ const BotonPrincipal = ({ onPress, title }) => {
       paddingVertical: 10, // Espaciado vertical
       alignItems: 'center', // Alineación horizontal de elementos
       justifyContent: 'center', // Alineación vertical de elementos
+      marginTop: 20,
     },
     buttonText: {
       color: colors.TextoTitulo, // Color del texto del botón

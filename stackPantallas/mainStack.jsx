@@ -2,7 +2,9 @@ import React from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { NavigationContainer } from "@react-navigation/native";
 import HomeScreen from "../views/HomeScren";
-import Login from "../views/Login";
+import Login from "../views/Registro";
+import Registro from "../views/Registro";
+import Inicio from "../views/Inicio";
 
 const Stack = createNativeStackNavigator()
 
@@ -16,8 +18,12 @@ const MainStack = () => {
                 //options={{ title: 'Bienvenido' }}
             />
             <Stack.Screen 
-                name="Login" 
-                component={Login} 
+                name="Registro" 
+                component={Registro} 
+            />
+             <Stack.Screen 
+                name="Principal" 
+                component={Inicio} 
             />
         </Stack.Navigator>
       </NavigationContainer>
