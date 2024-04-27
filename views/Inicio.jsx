@@ -3,13 +3,19 @@ import{Text,TextInput,StyleSheet,View} from 'react-native';
 import BotonPrincipal from "../componentes/botonPrincipal";
 import colors from "../styles/colores";
 import CustomText from "../componentes/InputText";
+import { Button } from '@rneui/base';
+import AvatarUser from "../componentes/CabezeraUser";
+
+const AwesomeButton = () => (<Button title='Welcome'/>)
 
 const Inicio = ({ navigation }) => {
     return (
+      
       <View style={styles.container}>
       
       {/* Sección de Bienvenida */}
       <View style={styles.section}>
+      <AvatarUser/>
       <Text style={styles.nameText}>AQUI VA TU NOMBRE</Text>
         <Text style={styles.welcomeText}>¡Bienvenido!</Text>
       </View>
