@@ -5,6 +5,7 @@ import { Avatar } from '@rneui/themed';
 // LEER **********
 // Mi idea es que este sea todo el componente de la cabezera del usuario donde se muestre nombre, foto y asi
 // se le van a pasar por parametros aunque de momento estan estaticos. 
+
 const AvatarUser = () => {
   return (
     <Avatar
