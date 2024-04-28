@@ -3,6 +3,9 @@ import{Text,TextInput,StyleSheet,View} from 'react-native';
 import BotonPrincipal from "../componentes/botonPrincipal";
 import colors from "../styles/colores";
 import CustomText from "../componentes/InputText";
+import SeccionCategorias from '../componentes/Categorias';
+
+
 import { Button } from '@rneui/base';
 import AvatarUser from "../componentes/CabezeraUser";
 
@@ -27,26 +30,12 @@ const Inicio = ({ navigation }) => {
         </Text>
       </View>
 
-      {/* Sección de Categorías en forma horizontal */}
-      <View style={styles.section}>
-        <Text style={styles.categoryHeader}>Categorías</Text>
+      {/* Sección de Categorias */}
+      <View>
+      <SeccionCategorias navigation={navigation} />
 
-        {/* Contenedor para las categorías en forma horizontal */}
-        <View style={styles.horizontalCategories}>
-          <View style={styles.categoryBlock}>
-            <Text>Fitness</Text>
-          </View>
-          <View style={styles.categoryBlock}>
-            <Text>Nutrición</Text>
-          </View>
-          <View style={styles.categoryBlock}>
-            <Text>Motivación</Text>
-          </View>
-          <View style={styles.categoryBlock}>
-            <Text>Bienestar</Text>
-          </View>
-        </View>
       </View>
+
 
     </View>
      
