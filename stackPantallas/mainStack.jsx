@@ -9,47 +9,86 @@ import Categorias from "../views/ViewCategorias";
 import FuerzaNivel from "../views/NivelFuerza";
 import StartFuerzaPrin from "../views/StartFuerzaPrincipiante";
 import EjercicioPrincipianteFuerza from "../views/EjercicioPrincipianteFuerza";
+import { createDrawerNavigator, DrawerContentScrollView, DrawerItemList, DrawerItem } from '@react-navigation/drawer';
+import colors from "../styles/colores";
+
 
 const Stack = createNativeStackNavigator()
+const Drawer = createDrawerNavigator()
+
+const CustomDrawerContent = (props) => {
+    return (
+        <DrawerContentScrollView {...props}>
+            <DrawerItemList {...props} />
+            <DrawerItem
+                label="Perfil"
+                onPress={() => {
+                    // accion ir a la pantalla perfil
+                }}
+            />
+            <DrawerItem
+                label="Cerrar sesión"
+                onPress={() => {
+                    // Metodo para cerrar sesion
+                }}
+            />
+        </DrawerContentScrollView>
+    );
+};
+
+const InicioStack = () => {
+    return (
+        <Drawer.Navigator drawerContent={(props) => <CustomDrawerContent {...props} />}>
+            <Drawer.Screen name="Inicio" component={Inicio}/>
+        </Drawer.Navigator>
+    );
+};
 
 const MainStack = () => {
     return (
-      <NavigationContainer>
-        <Stack.Navigator>
-            <Stack.Screen
-                name="Bienvenido"
-                component={HomeScreen}
-                //options={{ title: 'Bienvenido' }}
-            />
-            <Stack.Screen 
-                name="Registro" 
-                component={Registro} 
-            />
-             <Stack.Screen 
-                name="Principal" 
-                component={Inicio} 
-            />
-             <Stack.Screen 
-                name="Categorias" 
-                component = {Categorias}
-            />
-             <Stack.Screen 
-                name="Entrenamiento principiante de fuerza" 
-                component = {FuerzaNivel}
-            />
-            <Stack.Screen 
-                name="Fuerza Principiante" 
-                component = {StartFuerzaPrin}
-            />
-               <Stack.Screen 
-                name="Ejercicios Principiante Fuerza" 
-                component = {EjercicioPrincipianteFuerza}
-            />
-        </Stack.Navigator>
-      </NavigationContainer>
+        <NavigationContainer>
+            <Stack.Navigator>
+                <Stack.Screen
+                    name="Bienvenido"
+                    component={HomeScreen}
+                    //options={{ title: 'Bienvenido' }}
+                    options={{ headerShown: false }}
+                />
+                <Stack.Screen
+                    name="Registro"
+                    component={Registro}
+                    options={{ headerShown: false }}
+                />
+                <Stack.Screen
+                    name="Principal"
+                    component={InicioStack}
+                    options={{ headerShown: false }}
+                />
+                <Stack.Screen
+                    name="Categorias"
+                    component={Categorias}
+                    options={{ headerShown: false }}
+                />
+                <Stack.Screen
+                    name="Entrenamiento principiante de fuerza"
+                    component={FuerzaNivel}
+                    options={{ headerShown: false }}
+                />
+                <Stack.Screen
+                    name="Fuerza Principiante"
+                    component={StartFuerzaPrin}
+                    options={{ headerShown: false }}
+                />
+                <Stack.Screen
+                    name="Ejercicios Principiante Fuerza"
+                    component={EjercicioPrincipianteFuerza}
+                    options={{ headerShown: false }}
+                />
+            </Stack.Navigator>
+        </NavigationContainer>
     );
-  }
+}
 
-  
 
- export default MainStack
+
+export default MainStack
