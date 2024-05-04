@@ -1,33 +1,31 @@
 import React from 'react';
 import EntrenamientoTemplate from '../componentes/TipoEntrenamiento';
 
-const FuerzaScreen = ({navigation}) => {
+const HipertrofiaScreen = ({navigation}) => {
   const handleLevelSelect = (level) => {
     if(level === 'Principiante')
     {
-      navigation.navigate('Fuerza Principiante');
+      navigation.navigate('Hipertrofia Principiante');
     }
     if(level === 'Intermedio')
     {
-      navigation.navigate('Fuerza intermedio');
+      navigation.navigate('Hipertrofia intermedio');
 
     }
     if(level === 'Experto')
     {
-      navigation.navigate('Fuerza experto');
+      navigation.navigate('Hipertrofia experto');
 
     }
-    
-    //aqui agregar el siguiente nivel dependiendo
   };
 
   return (
     <EntrenamientoTemplate
-      title="Entrenamiento de Fuerza"
+      title="Entrenamiento de Hipertrofia"
       question="¿Qué nivel consideras que estás?"
       onLevelSelect={handleLevelSelect}
     />
   );
 };
 
-export default FuerzaScreen;
+export default HipertrofiaScreen;

@@ -6,10 +6,10 @@ const SeccionCategorias = ({ navigation }) => (
     <Text style={styles.categoryHeader} >Categorías</Text>
     <View style={styles.horizontalCategories}>
       <View style={styles.categoryBlock}>
-        <Text style={styles.categoryText} onPress={() => navigation.navigate('Entrenamiento principiante de fuerza')}>Fuerza</Text>
+        <Text style={styles.categoryText} onPress={() => navigation.navigate('Entrenamiento de fuerza')}>Fuerza</Text>
       </View>
       <View style={styles.categoryBlock}>
-        <Text style={styles.categoryText}>Hipertrofia</Text>
+        <Text style={styles.categoryText}onPress={() => navigation.navigate('Entrenamiento de hipetrofia')}>Hipertrofia</Text>
       </View>
       <View style={styles.categoryBlock}>
         <Text style={styles.categoryText} onPress={() => navigation.navigate('Categorias')}>Ver más</Text>
