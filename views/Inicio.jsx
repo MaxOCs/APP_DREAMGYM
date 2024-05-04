@@ -1,26 +1,15 @@
 import React from "react";
-import{Text,TextInput,StyleSheet,View} from 'react-native';
-import BotonPrincipal from "../componentes/botonPrincipal";
-import colors from "../styles/colores";
-import CustomText from "../componentes/InputText";
-import SeccionCategorias from '../componentes/Categorias';
-
-
-import { Button } from '@rneui/base';
+import{Text,StyleSheet,View} from 'react-native';
+import { Button, Header, Icon} from '@rneui/base';
 import AvatarUser from "../componentes/CabezeraUser";
-
-const AwesomeButton = () => (<Button title='Welcome'/>)
+import SliderItem from "../componentes/Slider-Item";
 
 const Inicio = ({ navigation }) => {
     return (
-      
       <View style={styles.container}>
-      
       {/* Sección de Bienvenida */}
-      <View style={styles.section}>
-      <AvatarUser/>
-      <Text style={styles.nameText}>AQUI VA TU NOMBRE</Text>
-        <Text style={styles.welcomeText}>¡Bienvenido!</Text>
+        <View style={styles.section}>
+        <AvatarUser ImgenUrl={"https://randomuser.me/api/portraits/men/36.jpg"} NameUsuario={"Nombre apellido apellido"}/>
       </View>
 
       {/* Sección de Frase */}
@@ -30,12 +19,10 @@ const Inicio = ({ navigation }) => {
         </Text>
       </View>
 
-      {/* Sección de Categorias */}
-      <View>
-      <SeccionCategorias navigation={navigation} />
+      {/* Sección de Categorías en forma horizontal */}
+      <SliderItem/>
 
-      </View>
-
+      
 
     </View>
      
