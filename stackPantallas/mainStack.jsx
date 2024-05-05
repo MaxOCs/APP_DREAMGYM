@@ -6,9 +6,10 @@ import Login from "../views/Registro";
 import Registro from "../views/Registro";
 import Inicio from "../views/Inicio";
 import Categorias from "../views/ViewCategorias";
-import FuerzaNivel from "../views/NivelFuerza";
-import StartFuerzaPrin from "../views/StartFuerzaPrincipiante";
-import EjercicioPrincipianteFuerza from "../views/EjercicioPrincipianteFuerza";
+import Nivel from "../views/Nivel";
+import Start from "../views/Start";
+import Ejercicio from "../views/Ejercicio";
+import generarIMC from "../views/CrearNewIMC";
 import { createDrawerNavigator, DrawerContentScrollView, DrawerItemList, DrawerItem } from '@react-navigation/drawer';
 import colors from "../styles/colores";
 
@@ -69,19 +70,19 @@ const MainStack = () => {
                     component={Categorias}
                     options={{ headerShown: false }}
                 />
-                <Stack.Screen
-                    name="Entrenamiento principiante de fuerza"
-                    component={FuerzaNivel}
+                 <Stack.Screen
+                    name="Start"
+                    component={Start}
                     options={{ headerShown: false }}
                 />
-                <Stack.Screen
-                    name="Fuerza Principiante"
-                    component={StartFuerzaPrin}
+                 <Stack.Screen
+                    name="Nivel"
+                    component={Nivel}
                     options={{ headerShown: false }}
                 />
-                <Stack.Screen
-                    name="Ejercicios Principiante Fuerza"
-                    component={EjercicioPrincipianteFuerza}
+                  <Stack.Screen
+                    name="Ejercicio"
+                    component={Ejercicio}
                     options={{ headerShown: false }}
                 />
             </Stack.Navigator>

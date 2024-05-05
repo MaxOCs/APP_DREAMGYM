@@ -2,6 +2,8 @@ import React from 'react';
 import { View, FlatList, Text, StyleSheet } from 'react-native';
 import CategoryItem from '../componentes/CategoriasItem'; // Importar el componente CategoryItem
 
+
+
 const CategoriasView = ({ navigation }) => {
 
   const categories = [
@@ -13,15 +15,31 @@ const CategoriasView = ({ navigation }) => {
 
   ];
 
+  
+
   // Función para manejar qué sucede al hacer clic en una categoría
+  //EN TEORIA TENGO QUE HACER UNA FUNCION PARA DESPLEGAR LOS DATOS DE LA BD
+
   const handleCategoryPress = (category) => {
+      if(category.name === 'Fuerza')
+      {
+        navigation.navigate('Entrenamiento de fuerza')
+      }
+      if(category.name === 'Hipertrofia')
+      {
+        navigation.navigate('Entrenamiento de hipetrofia')
+      }
+      if(category.name === 'Indice de masa corporal')
+      {
+        navigation.navigate('Nuevo IMC')
+      }
     console.log(`Se seleccionó la categoría: ${category.name}`);
     // Puedes navegar o realizar otras acciones
   };
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Categorías Disponibles</Text>
+      <Text style={styles.title}>Categorías</Text>
       <FlatList
         data={categories}
         keyExtractor={(item) => item.name}
@@ -35,6 +53,7 @@ const CategoriasView = ({ navigation }) => {
     </View>
   );
 };
+
 
 const styles = StyleSheet.create({
   container: {

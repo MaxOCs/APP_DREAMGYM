@@ -3,7 +3,7 @@ import{Text,TextInput,StyleSheet,View} from 'react-native';
 import ImagenesComponente from "../componentes/Imagenes";
 import BotonPrincipal from "../componentes/botonPrincipal";
 
-const EjercicioPrincipianteFuerza = ({navigation}) => {
+const Ejercicio = ({navigation}) => {
   
   return (
     
@@ -30,4 +30,4 @@ const EjercicioPrincipianteFuerza = ({navigation}) => {
   );
 };
 
-export default EjercicioPrincipianteFuerza;
+export default Ejercicio;
