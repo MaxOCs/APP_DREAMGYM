@@ -3,7 +3,7 @@ import{Text,TextInput,StyleSheet,View} from 'react-native';
 import ImagenesComponente from "../componentes/Imagenes";
 import BotonPrincipal from "../componentes/botonPrincipal";
 
-const StartFuerzaExperto = ({navigation}) => {
+const Start = ({navigation}) => {
   
   return (
     
@@ -21,7 +21,7 @@ const StartFuerzaExperto = ({navigation}) => {
       AQUI VAN LOS NUMEROS DE EJERCICIO  {/*EN TEORIA AQUI SE SACAN LOS NUMERO DE EJERCICIO POR NIVEL DE LA (BD)*/}
     </Text>
 
-    <BotonPrincipal onPress={() =>navigation.navigate('Ejercicios Experto Fuerza')} title="Comenzar"/> 
+    <BotonPrincipal onPress={() =>navigation.navigate('Ejercicio')} title="Comenzar"/> 
 
     </View>
    
@@ -31,4 +31,4 @@ const StartFuerzaExperto = ({navigation}) => {
   );
 };
 
-export default StartFuerzaExperto;
+export default Start;

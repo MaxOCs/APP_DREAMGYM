@@ -20,7 +20,7 @@ const Inicio = ({ navigation }) => {
       </View>
 
       {/* Sección de Categorías en forma horizontal */}
-      <SliderItem/>
+      <SliderItem navigation={navigation} />
 
       
 

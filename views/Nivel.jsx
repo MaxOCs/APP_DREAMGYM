@@ -1,8 +1,11 @@
 import React from 'react';
 import EntrenamientoTemplate from '../componentes/TipoEntrenamiento';
 
-const FuerzaScreen = ({navigation}) => {
+const Nivel = ({navigation}) => {
   const handleLevelSelect = (level) => {
+  
+    
+    
     if(level === 'Principiante')
     {
       navigation.navigate('Fuerza Principiante');
@@ -30,4 +33,4 @@ const FuerzaScreen = ({navigation}) => {
   );
 };
 
-export default FuerzaScreen;
+export default Nivel;

@@ -6,18 +6,10 @@ import Login from "../views/Registro";
 import Registro from "../views/Registro";
 import Inicio from "../views/Inicio";
 import Categorias from "../views/ViewCategorias";
-import FuerzaNivel from "../views/NivelFuerza";
-import HipertrofiaNivel from "../views/NivelHipertrofia";
-import StartFuerzaPrin from "../views/StartFuerzaPrincipiante";
-import StartFuerzaInter from "../views/StartFuerzaIntermedio";
-import StartFuerzaExpert from "../views/StartFuerzaExperto";
-import StartHipertrofiaPrin from "../views/StartHipertrofiaPrincipiante";
-import StartHipertrofiaInter from "../views/StartHipertrofiaIntermedio";
-import StartHipertrofiaExpert from "../views/StartHipertrofiaExperto";
-import EjercicioPrincipianteFuerza from "../views/EjercicioPrincipianteFuerza";
-import EjercicioIntermedioFuerza from "../views/EjercicioIntermedioFuerza";
-import EjercicioInterExpertoFuerza from "../views/EjercicioExpertoFuerza";
-import generarIMC from "../views/CrearNewIMC"
+import Nivel from "../views/Nivel";
+import Start from "../views/Start";
+import Ejercicio from "../views/Ejercicio";
+import generarIMC from "../views/CrearNewIMC";
 import { createDrawerNavigator, DrawerContentScrollView, DrawerItemList, DrawerItem } from '@react-navigation/drawer';
 import colors from "../styles/colores";
 
@@ -78,19 +70,19 @@ const MainStack = () => {
                     component={Categorias}
                     options={{ headerShown: false }}
                 />
-                <Stack.Screen
-                    name="Entrenamiento principiante de fuerza"
-                    component={FuerzaNivel}
+                 <Stack.Screen
+                    name="Start"
+                    component={Start}
                     options={{ headerShown: false }}
                 />
-                <Stack.Screen
-                    name="Fuerza Principiante"
-                    component={StartFuerzaPrin}
+                 <Stack.Screen
+                    name="Nivel"
+                    component={Nivel}
                     options={{ headerShown: false }}
                 />
-                <Stack.Screen
-                    name="Ejercicios Principiante Fuerza"
-                    component={EjercicioPrincipianteFuerza}
+                  <Stack.Screen
+                    name="Ejercicio"
+                    component={Ejercicio}
                     options={{ headerShown: false }}
                 />
             </Stack.Navigator>
