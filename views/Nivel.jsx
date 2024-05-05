@@ -1,32 +1,34 @@
 import React from 'react';
 import EntrenamientoTemplate from '../componentes/TipoEntrenamiento';
 
-const Nivel = ({navigation}) => {
+const Nivel = ({ navigation, route }) => {
+
+  //ACA AGARRAMOS EL PARAMETRO DE CATEGORIA
+  const { category } = route.params || {};
+
   const handleLevelSelect = (level) => {
-  
-    
-    
-    if(level === 'Principiante')
-    {
-      navigation.navigate('Fuerza Principiante');
+    if (level === 'Principiante') {
+      navigation.navigate('Start', {
+        category, //AKI AGARRAMOS CATEGORIA
+        level, //LEVEL
+      });
+    } else if (level === 'Intermedio') {
+      navigation.navigate('Start', {
+        category,
+        level,
+      });
+    } else if (level === 'Experto') {
+      navigation.navigate('Start', {
+        category,
+        level,
+      });
     }
-    if(level === 'Intermedio')
-    {
-      navigation.navigate('Fuerza intermedio');
-
-    }
-    if(level === 'Experto')
-    {
-      navigation.navigate('Fuerza experto');
-
-    }
-    
-    //aqui agregar el siguiente nivel dependiendo
+    // Puedes agregar más condiciones si es necesario
   };
 
   return (
     <EntrenamientoTemplate
-      title="Entrenamiento de Fuerza"
+      title={`Entrenamiento de ${category || 'Desconocido'}`} // Personalizamos el título
       question="¿Qué nivel consideras que estás?"
       onLevelSelect={handleLevelSelect}
     />

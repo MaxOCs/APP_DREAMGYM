@@ -1,6 +1,7 @@
 import { TouchableOpacity } from 'react-native';
 import React, { useRef } from 'react';
 import { View, Text, StyleSheet, Animated, ScrollView } from 'react-native';
+import CategoryItem from './CategoriasItem';
 
 const SliderItem = ({ navigation }) => {
     const scrollX = useRef(new Animated.Value(0)).current;
@@ -15,14 +16,16 @@ const SliderItem = ({ navigation }) => {
         scrollX.setValue(position);
     };
 
+    //AGREGAMOS LA PANTALLA, EL NIVEL, CATEGORIA(SI ES EL CASO)
     const data = [
-        { id: '1', text: 'FUERZA', screen: 'Start' },
-        { id: '2', text: 'HIPERTROFIA', screen: 'Start' },
+        { id: '1', text: 'FUERZA', screen: 'Nivel', category: 'Fuerza'},
+        { id: '2', text: 'HIPERTROFIA', screen: 'Nivel', category: 'Hipertrofia'},
         { id: '3', text: 'EJERCICIO'},
     ];
 
-    const handleNavigation = (screenName) => {
-        navigation.navigate(screenName);
+    //HANDLE PARA NAVEGAR ENTRE PANTALLAS Y OBTENER EL PARAMETRO
+    const handleNavigation = (screenName,  params = {}) => {
+        navigation.navigate(screenName, params);
     };
 
     const renderItem = ({ item, index }) => {
@@ -48,8 +51,9 @@ const SliderItem = ({ navigation }) => {
             <TouchableOpacity
                 key={item.id}
                 style={[styles.itemContainer, { opacity, transform: [{ scale }] }]}
-                onPress={() => handleNavigation(item.screen)} // Navega a la pantalla indicada
-            >
+                //AQUI SE PASAN LOS PARAMETROS DEL METODO handle
+                onPress={() => handleNavigation(item.screen, { category: item.category })}
+                >
                 <Text style={styles.text}>{item.text}</Text>
             </TouchableOpacity>
         );
