@@ -1,41 +1,50 @@
-import React from "react";
+import React, { useState } from "react";
+import axios from "axios";
 import BotonPrincipal from "../componentes/botonPrincipal";
 import InputText from "../componentes/InputText";
-import{Text,View,StyleSheet} from 'react-native';
-import ImagenesComponente from "../componentes/Imagenes";
+import { Text, View, StyleSheet } from "react-native";
 import colors from "../styles/colores";
 
-
 const HomeScreen = ({ navigation }) => {
-    return (
-      
-      <View style = {styles.container}>
-         <ImagenesComponente uri="https://st4.depositphotos.com/3265223/24936/v/450/depositphotos_249366040-stock-illustration-fitness-gym-logo-with-strong.jpg" width={100} height={100} />
-          {/* TITULO DE GYMAPP*/}
-           <Text style = {{color: colors.Primaryblue , fontSize: 36}}>GYMAPP</Text>
-          {/* ESTOS SON LOS INPUTS*/}
-            <InputText placeholder="Usuario" />
-            <InputText placeholder="Contraseña" />
-          
-          {/* LABEL DE REGISTRARME PARA DIRIGIRME A PANTALLA REGISTRO*/}
-            <Text  onPress={() => navigation.navigate('Registro')} style = {{color: colors.Primaryblue , fontSize: 17}}>Registrarme</Text>
-         
-          {/* BOTON PARA INICIAR SESION*/}
-           <BotonPrincipal onPress={() =>navigation.navigate('Principal')} title="Iniciar sesión"/> 
-      </View>
-    
-    );
-  };
+  const [nombre, setNombre] = useState('');
+  const [contraseña, setContraseña] = useState('');
+  const [error, setError] = useState('');
 
-  const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      justifyContent: 'center',
-      alignItems: 'center',
-      marginBottom: 50, // Espacio debajo del título
-
-    }
-  });
   
 
-  export default HomeScreen
+  return (
+    <View style={styles.container}>
+      <Text style={{ color: colors.Primaryblue, fontSize: 36 }}>GYMAPP</Text>
+      <InputText
+        placeholder="Usuario"
+        value={nombre}
+        onChangeText={setNombre}
+      />
+      <InputText
+        placeholder="Contraseña"
+        secureTextEntry
+        value={contraseña}
+        onChangeText={setContraseña}
+      />
+      <Text
+        onPress={() => navigation.navigate("Registro")}
+        style={{ color: colors.Primaryblue, fontSize: 17 }}
+      >
+        Registrarme
+      </Text>
+      <BotonPrincipal onPress={() => navigation.navigate("Principal")} title="Iniciar sesión" />
+      {error && <Text>{error}</Text>}
+    </View>
+  );
+};
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    marginBottom: 50,
+  },
+});
+
+export default HomeScreen;
