@@ -34,6 +34,9 @@ const SliderItem = ({ navigation }) => {
         const inputRange = [index - 1, index, index + 1];
         const outputRangeOpacity = [0.5, 1, 0.5];
         const outputRangeScale = [0.8, 1, 0.8];
+          //const inputRange = data.map((_, i) => i * interval); //calcular el rango de lo items para hacerlo dinamico 
+        //const outputRangeOpacity = data.map((_, i) => (i === index ? 1 : 0.5)); // Opacidad máxima para el elemento actual, 0.5 para los demás
+        //const outputRangeScale = data.map((_, i) => (i === index ? 1 : 0.8)); // Escala máxima para el elemento actual, 0.8 para los demás
 
         const opacity = scrollX.interpolate({
             inputRange,
