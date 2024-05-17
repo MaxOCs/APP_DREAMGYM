@@ -19,7 +19,7 @@ const CategoriasView = ({ navigation }) => {
 
   // Función para manejar qué sucede al hacer clic en una categoría
   //EN TEORIA TENGO QUE HACER UNA FUNCION PARA DESPLEGAR LOS DATOS DE LA BD
-
+//fcghgf
   const handleCategoryPress = (category) => {
       if(category.name === 'Fuerza')
       {
