@@ -85,6 +85,11 @@ const MainStack = () => {
                     component={Ejercicio}
                     options={{ headerShown: false }}
                 />
+                <Stack.Screen
+                    name="IMC"
+                    component={generarIMC}
+                    options={{ headerShown: false }}
+                />
             </Stack.Navigator>
         </NavigationContainer>
     );

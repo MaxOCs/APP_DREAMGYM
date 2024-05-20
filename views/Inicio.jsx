@@ -1,35 +1,69 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Text, StyleSheet, View } from 'react-native';
-import { Button, Header, Icon } from '@rneui/base';
+import axios from 'axios';
+import webservice from '../webservice/rutaweb';
 import AvatarUser from "../componentes/CabezeraUser";
 import SliderItem from "../componentes/Slider-Item";
 
-const Inicio = ({ navigation }) => {
+const Inicio = ({ navigation, route }) => {
+
+
+
+  //NO PASA EL NOMBRE QUIEN SABE XQ 
+  useEffect(() => {
+    console.log('Nombre recibido en useEffect:', nombre);
+  }, [route.params]);
+  
+  const { nombre } = route.params|| {};
+  console.log('Nombre recibido:', nombre); // Verifica si nombre se está pasando correctamente
+
+  const [frases, setFrases] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  const url = `${webservice}/frases`;
+
+  useEffect(() => {
+    const fetchFrases = async () => {
+      try {
+        const response = await axios.get(url);
+        setFrases(response.data.frases);
+      } catch (error) {
+        console.error(error);
+        setError('Error al cargar las frases');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchFrases();
+  }, []);
+
   return (
     <View style={styles.container}>
-      {/* Sección de Bienvenida */}
       <View style={styles.section}>
-        <AvatarUser ImgenUrl={"https://randomuser.me/api/portraits/men/36.jpg"} NameUsuario={"Nombre apellido apellido"} />
+        <AvatarUser ImgenUrl={"https://randomuser.me/api/portraits/men/36.jpg"} NameUsuario={nombre} />
       </View>
 
-      {/* Sección de Frase */}
-      <View style={styles.quoteText}>
-        <Text style={styles.quoteText}>
-          "Aquí van las frases"
-        </Text>
-      </View>
+      <Text style={styles.quoteHeader}>Frases</Text>
+      {loading ? (
+        <Text>Cargando frases...</Text>
+      ) : error ? (
+        <Text>Error: {error}</Text>
+      ) : frases.length > 0 ? (
+        frases.map((frase, index) => (
+          <View key={index} style={styles.quoteText}>
+            <Text>{frase.descripcion}</Text>
+          </View>
+        ))
+      ) : (
+        <Text>No hay frases disponibles</Text>
+      )}
 
-      {/* Sección de Categorías en forma horizontal */}
       <SliderItem navigation={navigation} />
-
-
-
     </View>
-
-
   );
 };
-
 
 const styles = StyleSheet.create({
   container: {
@@ -40,34 +74,22 @@ const styles = StyleSheet.create({
   section: {
     marginVertical: 20, // Espacio entre secciones
   },
-  welcomeText: {
-    fontSize: 24,
-    fontWeight: 'bold',
+  quoteContainer: {
+    flexGrow: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingVertical: 20,
   },
-  nameText: {
-    fontSize: 18,
+  quoteHeader: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    marginBottom: 10,
   },
   quoteText: {
     fontSize: 16,
     fontStyle: 'italic',
-  },
-  categoryHeader: {
-    fontSize: 20,
-    fontWeight: 'bold',
-  },
-  horizontalCategories: {
-    flexDirection: 'row', // Disposición horizontal
-    justifyContent: 'space-between', // Espacio entre categorías
-    alignItems: 'center', // Alineación vertical
-  },
-  categoryBlock: {
-    backgroundColor: '#e0e0e0', // Color de fondo para el bloque
-    width: 100, // Tamaño del cuadrado
-    height: 100, // Tamaño del cuadrado
-    justifyContent: 'center', // Centra el texto en el bloque
-    alignItems: 'center', // Centra el texto en el bloque
-    borderRadius: 10, // Bordes redondeados
-    marginHorizontal: 10, // Espacio entre bloques
+    marginBottom: 5,
   },
 });
+
 export default Inicio;

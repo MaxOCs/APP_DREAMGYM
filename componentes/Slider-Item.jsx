@@ -20,7 +20,7 @@ const SliderItem = ({ navigation }) => {
     const data = [
         { id: '1', text: 'FUERZA', screen: 'Nivel', category: 'Fuerza'},
         { id: '2', text: 'HIPERTROFIA', screen: 'Nivel', category: 'Hipertrofia'},
-        { id: '3', text: 'EJERCICIO'},
+        { id: '3', text: 'I.M.C', screen: 'IMC'},
     ];
 
     //HANDLE PARA NAVEGAR ENTRE PANTALLAS Y OBTENER EL PARAMETRO
