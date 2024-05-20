@@ -3,7 +3,10 @@ import { Text, StyleSheet, View } from 'react-native';
 import { Button, Header, Icon } from '@rneui/base';
 import AvatarUser from "../componentes/CabezeraUser";
 import SliderItem from "../componentes/Slider-Item";
+<<<<<<< HEAD
 import FrasesContenedor from "../componentes/ContenedorFrases";
+=======
+>>>>>>> a9a7bbc2c780f06b98862365c1afa1be80c99480
 
 const Inicio = ({ navigation }) => {
   return (
@@ -14,9 +17,16 @@ const Inicio = ({ navigation }) => {
       </View>
 
       {/* Sección de Frase */}
+<<<<<<< HEAD
       {/* Sección de Frase */}
       <View style={styles.frases}>
         <FrasesContenedor Frase={'"PONLE LO DIVERTIDO ES PURO TOMATE"'}></FrasesContenedor>
+=======
+      <View style={styles.quoteText}>
+        <Text style={styles.quoteText}>
+          "Aquí van las frases"
+        </Text>
+>>>>>>> a9a7bbc2c780f06b98862365c1afa1be80c99480
       </View>
 
       {/* Sección de Categorías en forma horizontal */}
@@ -44,10 +54,13 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: 'bold',
   },
+<<<<<<< HEAD
   frases:{
     width: '100%',
     height: 200,
   },
+=======
+>>>>>>> a9a7bbc2c780f06b98862365c1afa1be80c99480
   nameText: {
     fontSize: 18,
   },

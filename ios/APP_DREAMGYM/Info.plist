@@ -31,10 +31,13 @@
 		<false/>
 		<key>NSAllowsLocalNetworking</key>
 		<true/>
+<<<<<<< HEAD
 		<key>NSCameraUsageDescription</key>
 		<string>We need access to your camera to take photos.</string>
 		<key>NSPhotoLibraryAddUsageDescription</key>
 		<string>We need access to your photo library to save photos.</string>
+=======
+>>>>>>> a9a7bbc2c780f06b98862365c1afa1be80c99480
 	</dict>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string></string>

@@ -10,7 +10,10 @@ import Nivel from "../views/Nivel";
 import Start from "../views/Start";
 import Ejercicio from "../views/Ejercicio";
 import generarIMC from "../views/CrearNewIMC";
+<<<<<<< HEAD
 import camara from "../views/Camara";
+=======
+>>>>>>> a9a7bbc2c780f06b98862365c1afa1be80c99480
 import { createDrawerNavigator, DrawerContentScrollView, DrawerItemList, DrawerItem } from '@react-navigation/drawer';
 import colors from "../styles/colores";
 
@@ -86,11 +89,14 @@ const MainStack = () => {
                     component={Ejercicio}
                     options={{ headerShown: false }}
                 />
+<<<<<<< HEAD
                 <Stack.Screen
                     name="Camara"
                     component={camara}
                     //options={{ headerShown: false }}
                 />
+=======
+>>>>>>> a9a7bbc2c780f06b98862365c1afa1be80c99480
             </Stack.Navigator>
         </NavigationContainer>
     );

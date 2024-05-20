@@ -10,7 +10,10 @@
     "test": "jest"
   },
   "dependencies": {
+<<<<<<< HEAD
     "@react-native-camera-roll/camera-roll": "^7.7.0",
+=======
+>>>>>>> a9a7bbc2c780f06b98862365c1afa1be80c99480
     "@react-navigation/drawer": "^6.6.15",
     "@react-navigation/native": "^6.1.17",
     "@react-navigation/native-stack": "^6.9.26",
@@ -24,8 +27,12 @@
     "react-native-reanimated": "~3.6.2",
     "react-native-safe-area-context": "4.8.2",
     "react-native-screens": "~3.29.0",
+<<<<<<< HEAD
     "react-native-vector-icons": "^10.0.3",
     "react-native-vision-camera": "^4.0.4"
+=======
+    "react-native-vector-icons": "^10.0.3"
+>>>>>>> a9a7bbc2c780f06b98862365c1afa1be80c99480
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
