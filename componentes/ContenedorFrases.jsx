@@ -3,8 +3,8 @@ import { View,Text,StyleSheet } from "react-native";
 //crear el componente
 const FrasesContenedor = ({Frase}) => {
     return (
-       <View>
-           <Text>{Frase}</Text>
+       <View style ={styles.container}>
+           <Text style = {styles.text}>{Frase}</Text>
        </View>
     )
 }
@@ -18,5 +18,10 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
     },
+    text: {
+        fontSize: 18,
+        fontWeight: 'bold',
+    },
 });
 export default FrasesContenedor;
+

@@ -3,6 +3,7 @@ import { Text, StyleSheet, View } from 'react-native';
 import { Button, Header, Icon } from '@rneui/base';
 import AvatarUser from "../componentes/CabezeraUser";
 import SliderItem from "../componentes/Slider-Item";
+import FrasesContenedor from "../componentes/ContenedorFrases";
 
 const Inicio = ({ navigation }) => {
   return (
@@ -13,10 +14,9 @@ const Inicio = ({ navigation }) => {
       </View>
 
       {/* Sección de Frase */}
-      <View style={styles.quoteText}>
-        <Text style={styles.quoteText}>
-          "Aquí van las frases"
-        </Text>
+      {/* Sección de Frase */}
+      <View style={styles.frases}>
+        <FrasesContenedor Frase={'"PONLE LO DIVERTIDO ES PURO TOMATE"'}></FrasesContenedor>
       </View>
 
       {/* Sección de Categorías en forma horizontal */}
@@ -43,6 +43,10 @@ const styles = StyleSheet.create({
   welcomeText: {
     fontSize: 24,
     fontWeight: 'bold',
+  },
+  frases:{
+    width: '100%',
+    height: 200,
   },
   nameText: {
     fontSize: 18,
