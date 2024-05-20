@@ -20,11 +20,7 @@ const SliderItem = ({ navigation }) => {
     const data = [
         { id: '1', text: 'FUERZA', screen: 'Nivel', category: 'Fuerza'},
         { id: '2', text: 'HIPERTROFIA', screen: 'Nivel', category: 'Hipertrofia'},
-<<<<<<< HEAD
         { id: '3', text: 'EJERCICIO', screen: 'Camara', category: 'Hipertrofia'},
-=======
-        { id: '3', text: 'EJERCICIO'},
->>>>>>> a9a7bbc2c780f06b98862365c1afa1be80c99480
     ];
 
     //HANDLE PARA NAVEGAR ENTRE PANTALLAS Y OBTENER EL PARAMETRO
@@ -38,11 +34,7 @@ const SliderItem = ({ navigation }) => {
         const inputRange = [index - 1, index, index + 1];
         const outputRangeOpacity = [0.5, 1, 0.5];
         const outputRangeScale = [0.8, 1, 0.8];
-<<<<<<< HEAD
          //const inputRange = data.map((_, i) => i * interval); //calcular el rango de lo items para hacerlo dinamico 
-=======
-          //const inputRange = data.map((_, i) => i * interval); //calcular el rango de lo items para hacerlo dinamico 
->>>>>>> a9a7bbc2c780f06b98862365c1afa1be80c99480
         //const outputRangeOpacity = data.map((_, i) => (i === index ? 1 : 0.5)); // Opacidad máxima para el elemento actual, 0.5 para los demás
         //const outputRangeScale = data.map((_, i) => (i === index ? 1 : 0.8)); // Escala máxima para el elemento actual, 0.8 para los demás
 
