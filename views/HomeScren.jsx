@@ -10,6 +10,14 @@ const HomeScreen = ({ navigation }) => {
   const [error, setError] = useState('');
 
   
+  const handleLogin = () => {
+    console.log('Nombre de usuario:', nombre); // Verifica el valor de nombre
+    if (nombre === '') {
+      setError('Por favor, ingresa un nombre de usuario');
+      return;
+    }
+    navigation.navigate('Principal', { nombreUsuario: nombre });
+  };
 
   return (
     <View style={styles.container}>
@@ -31,8 +39,11 @@ const HomeScreen = ({ navigation }) => {
       >
         Registrarme
       </Text>
-      <BotonPrincipal onPress={() => navigation.navigate("Principal")} title="Iniciar sesión" />
-      {error && <Text>{error}</Text>}
+      <BotonPrincipal 
+        onPress={handleLogin} 
+        title="Iniciar sesión"  
+      />
+      {error && <Text style={{ color: 'red' }}>{error}</Text>}
     </View>
   );
 };

@@ -10,6 +10,7 @@ const Registro = ({ navigation }) => {
   const [ultimaFoto, setUltimaFoto] = useState(null);
   const [nombre, setNombre] = useState('');
   const [password, setPassword] = useState('');
+  const [foto,setfoto]=useState('')
   const [error, setError] = useState('');
   const [imagen, setImagen] = useState('https://img.freepik.com/psd-gratis/ilustracion-3d-avatar-o-perfil-humano_23-2150671142.jpg?size=338&ext=jpg&ga=GA1.1.1788068356.1716163200&semt=ais_user');
 
@@ -22,9 +23,12 @@ const Registro = ({ navigation }) => {
     const datos = new URLSearchParams({
       nombre,
       password,
+      foto,
     }).toString();
   
     const url = `${webservice}/registro?${datos}`;
+
+    console.log('Datos para el registro:', datos);
   
     try {
       const response = await fetch(url, {
@@ -60,8 +64,10 @@ const Registro = ({ navigation }) => {
           // Verificar si se debe actualizar la imagen
           if (takefoto) {
             setImagen(ultimaFoto);
+            setfoto(ultimaFoto);
             // Restablecer takefoto a false después de actualizar la imagen
             setTakeFoto(false);
+            console.log('la ruta de la foto es esta:'+ ultimaFoto.toString());
           }
         }
       } catch (error) {

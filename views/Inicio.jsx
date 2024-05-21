@@ -5,12 +5,15 @@ import AvatarUser from "../componentes/CabezeraUser";
 import SliderItem from "../componentes/Slider-Item";
 import FrasesContenedor from "../componentes/ContenedorFrases";
 
-const Inicio = ({ navigation }) => {
+const Inicio = ({ navigation, route }) => {
+
+  const nombreUsuario = route.params ? route.params.nombreUsuario : 'Usuario predetermido';
+
   return (
     <View style={styles.container}>
       {/* Sección de Bienvenida */}
       <View style={styles.section}>
-        <AvatarUser ImgenUrl={"https://randomuser.me/api/portraits/men/36.jpg"} NameUsuario={"Nombre apellido apellido"} />
+        <AvatarUser ImgenUrl={"https://randomuser.me/api/portraits/men/36.jpg"} NameUsuario={nombreUsuario} />
       </View>
 
       {/* Sección de Frase */}
