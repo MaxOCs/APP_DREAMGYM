@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import axios from "axios";
 import BotonPrincipal from "../componentes/botonPrincipal";
 import InputText from "../componentes/InputText";
 import { Text, View, StyleSheet } from "react-native";
@@ -41,9 +40,10 @@ const HomeScreen = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    padding:10,
+    backgroundColor: '#fff',
     justifyContent: "center",
     alignItems: "center",
-    marginBottom: 50,
   },
 });
 

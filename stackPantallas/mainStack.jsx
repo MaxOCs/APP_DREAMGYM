@@ -89,7 +89,7 @@ const MainStack = () => {
                 <Stack.Screen
                     name="Camara"
                     component={camara}
-                    //options={{ headerShown: false }}
+                    options={{ headerShown: false }}
                 />
             </Stack.Navigator>
         </NavigationContainer>
