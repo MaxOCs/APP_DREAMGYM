@@ -7,7 +7,7 @@ import FrasesContenedor from "../componentes/ContenedorFrases";
 
 const Inicio = ({ navigation, route }) => {
 
-  const nombreUsuario = route.params ? route.params.nombreUsuario : 'Usuario predetermido';
+  const nombreUsuario = route.params.nombreUsuario ? route.params.nombreUsuario : 'Usuario predetermido';
 
   return (
     <View style={styles.container}>

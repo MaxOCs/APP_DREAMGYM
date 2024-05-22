@@ -3,6 +3,7 @@ import BotonPrincipal from "../componentes/botonPrincipal";
 import InputText from "../componentes/InputText";
 import { Text, View, StyleSheet } from "react-native";
 import colors from "../styles/colores";
+import { Screen } from "react-native-screens";
 
 const HomeScreen = ({ navigation }) => {
   const [nombre, setNombre] = useState('');
@@ -16,7 +17,7 @@ const HomeScreen = ({ navigation }) => {
       setError('Por favor, ingresa un nombre de usuario');
       return;
     }
-    navigation.navigate('Principal', { nombreUsuario: nombre });
+    navigation.navigate('Principal', {screen: 'Inicio',params:{nombreUsuario:nombre}});
   };
 
   return (
