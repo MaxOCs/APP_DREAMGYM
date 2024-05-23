@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import BotonPrincipal from "../componentes/botonPrincipal";
 import InputText from "../componentes/InputText";
 import { Text, View, StyleSheet } from "react-native";

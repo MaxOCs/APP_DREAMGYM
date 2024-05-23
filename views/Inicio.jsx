@@ -1,13 +1,39 @@
-import React from "react";
+
+import React, { useEffect, useState } from "react";
+import axios from 'axios';
+import webservice from '../webservice/rutaweb';
 import { Text, StyleSheet, View } from 'react-native';
-import { Button, Header, Icon } from '@rneui/base';
 import AvatarUser from "../componentes/CabezeraUser";
 import SliderItem from "../componentes/Slider-Item";
 import FrasesContenedor from "../componentes/ContenedorFrases";
 
 const Inicio = ({ navigation, route }) => {
 
+  const { prueba } = route.params;
+  const [frases, setFrases] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
   const nombreUsuario = route.params.nombreUsuario ? route.params.nombreUsuario : 'Usuario predetermido';
+
+  console.log(prueba);
+  const url = `${webservice}/frases`;
+
+  useEffect(() => {
+    const fetchFrases = async () => {
+      try {
+        const response = await axios.get(url);
+        setFrases(response.data.frases);
+      } catch (error) {
+        console.error(error);
+        setError('Error al cargar las frases');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchFrases();
+  }, []);
 
   return (
     <View style={styles.container}>
@@ -17,10 +43,19 @@ const Inicio = ({ navigation, route }) => {
       </View>
 
       {/* Sección de Frase */}
-      {/* Sección de Frase */}
-      <View style={styles.frases}>
-        <FrasesContenedor Frase={'"PONLE LO DIVERTIDO ES PURO TOMATE"'}></FrasesContenedor>
-      </View>
+      {loading ? (
+        <Text>Cargando frases...</Text>
+      ) : error ? (
+        <Text>Error: {error}</Text>
+      ) : frases.length > 0 ? (
+        frases.map((frase, index) => (
+          <View key={index} style={styles.frases}>
+            <FrasesContenedor Frase={frase.descripcion}></FrasesContenedor>
+          </View>
+        ))
+      ) : (
+        <Text>No hay frases disponibles</Text>
+      )}
 
       {/* Sección de Categorías en forma horizontal */}
       <SliderItem navigation={navigation} />
