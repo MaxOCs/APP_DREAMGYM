@@ -1,25 +1,32 @@
 import React, { useState } from "react";
-import { Text, View, StyleSheet } from "react-native";
+import PushNotification from "react-native-push-notification";//esto es de noti
+import moment from "moment";
+import { Text, View, StyleSheet, TouchableOpacity } from "react-native";
 import BotonPrincipal from "../componentes/botonPrincipal";
 import InputText from "../componentes/InputText";
 import colors from "../styles/colores";
-import webservice from "../webservice/rutaweb"
+import webservice from "../webservice/rutaweb";
+
+
+
 const HomeScreen = ({ navigation }) => {
   const [nombre, setNombre] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
 
 
+ 
+  
 
 
-  //LOGIN TOTALMENTE FUNCIONAL
+  // Método para manejar la navegación entre pantallas con parámetros
+  const handleNavigation = (screenName, params = {}) => {
+    navigation.navigate(screenName, params);
+  };
+
+  // Función para manejar el inicio de sesión
   const handleLogin = async () => {
-    const queryParams = new URLSearchParams({
-      nombre,
-      password,
-    }).toString();
-
-
+    const queryParams = new URLSearchParams({ nombre, password }).toString();
     const url = `${webservice}/login?${queryParams}`;
 
     try {
@@ -29,9 +36,11 @@ const HomeScreen = ({ navigation }) => {
           'Content-Type': 'application/json',
         },
       });
+
       console.log('Valor de nombre antes de navegar:', nombre);
+
       if (response.ok) {
-        navigation.navigate('Principal', { nombre: nombre }); // Pasar nombre como parámetro
+        handleNavigation('Principal', { prueba: "josue" }); // Navegar a 'Principal' con el parámetro prueba
       } else {
         const errorData = await response.json();
         setError(errorData.error || 'Error en el registro');
@@ -56,13 +65,10 @@ const HomeScreen = ({ navigation }) => {
         value={password}
         onChangeText={setPassword}
       />
-      <Text
-        onPress={() => navigation.navigate("Registro", {nombre})}
-        style={{ color: colors.Primaryblue, fontSize: 17 }}
-      >
-        Registrarme
-      </Text>
-      <BotonPrincipal onPress={handleLogin} title="Iniciar sesión" />
+      <TouchableOpacity onPress={() => handleNavigation("Registro")} style={{ marginBottom: 20 }}>
+        <Text style={{ color: colors.Primaryblue, fontSize: 17 }}>Registrarme</Text>
+      </TouchableOpacity>
+      <BotonPrincipal onPress={() => navigation.navigate('Principal', { prueba: "josue" })} title="Iniciar sesión" />
       {error && <Text>{error}</Text>}
     </View>
   );

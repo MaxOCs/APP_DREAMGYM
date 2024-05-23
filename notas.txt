@@ -1,3 +1,6 @@
 Ejecuta este comando
 npm install axios
 
+//PARA LAS NOTIFICACIONES
+npm install react-native-push-notification
+npm install moment

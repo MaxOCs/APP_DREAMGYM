@@ -4,23 +4,15 @@ import axios from 'axios';
 import webservice from '../webservice/rutaweb';
 import AvatarUser from "../componentes/CabezeraUser";
 import SliderItem from "../componentes/Slider-Item";
+import FrasesContenedor from "../componentes/ContenedorFrases";
 
-const Inicio = ({ navigation, route }) => {
-
-
-
-  //NO PASA EL NOMBRE QUIEN SABE XQ 
-  useEffect(() => {
-    console.log('Nombre recibido en useEffect:', nombre);
-  }, [route.params]);
-  
-  const { nombre } = route.params|| {};
-  console.log('Nombre recibido:', nombre); // Verifica si nombre se está pasando correctamente
-
+const Inicio = ({ route, navigation }) => {
+  const { prueba } = route.params;
   const [frases, setFrases] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
+  console.log(prueba);
   const url = `${webservice}/frases`;
 
   useEffect(() => {
@@ -41,8 +33,9 @@ const Inicio = ({ navigation, route }) => {
 
   return (
     <View style={styles.container}>
+      <Text style={styles.text}>Bienvenido, {prueba}!</Text>
       <View style={styles.section}>
-        <AvatarUser ImgenUrl={"https://randomuser.me/api/portraits/men/36.jpg"} NameUsuario={nombre} />
+        <AvatarUser ImgenUrl={"https://randomuser.me/api/portraits/men/36.jpg"} />
       </View>
 
       <Text style={styles.quoteHeader}>Frases</Text>
@@ -72,7 +65,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#f5f5f5',
   },
   section: {
-    marginVertical: 20, // Espacio entre secciones
+    marginVertical: 20,
   },
   quoteContainer: {
     flexGrow: 1,
