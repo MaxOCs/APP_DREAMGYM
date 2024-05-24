@@ -15,19 +15,19 @@ const Registro = ({ navigation }) => {
   const [imagen, setImagen] = useState('https://img.freepik.com/psd-gratis/ilustracion-3d-avatar-o-perfil-humano_23-2150671142.jpg?size=338&ext=jpg&ga=GA1.1.1788068356.1716163200&semt=ais_user');
 
   const handleRegistro = async () => {
-    if (!nombre || !password) {
-      setError('Falta campos por completar');
+    if (!nombre || !password || !foto) {
+      setError('Faltan campos por completar');
       return;
     }
   
     const datos = new URLSearchParams({
       nombre,
       password,
-      foto,
+      foto: encodeURIComponent(foto), // Asegúrate de codificar la URL de la foto
     }).toString();
   
     const url = `${webservice}/registro?${datos}`;
-
+  
     console.log('Datos para el registro:', datos);
   
     try {
@@ -49,6 +49,7 @@ const Registro = ({ navigation }) => {
       setError('Error de red');
     }
   };
+  
   
   useEffect(() => {
     const obtenerUltimaFoto = async () => {

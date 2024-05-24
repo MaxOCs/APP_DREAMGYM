@@ -1,9 +1,9 @@
 import React, { useRef, useEffect, useState } from 'react';
-import { Button, Text, View, StyleSheet, PermissionsAndroid, Alert } from 'react-native';
+import { Button, Text, View, StyleSheet, PermissionsAndroid, Alert,TouchableOpacity } from 'react-native';
 import { Camera, useCameraDevice } from 'react-native-vision-camera';
 import { CameraRoll } from '@react-native-camera-roll/camera-roll';
 
-const PantallaCamara = ({ navigation, route }) => {
+const PantallaCamara = ({ navigation}) => {
   const camera = useRef(null);
   const device = useCameraDevice('back');
   const [hasPermission, setHasPermission] = useState(false);
@@ -62,15 +62,30 @@ const PantallaCamara = ({ navigation, route }) => {
         isActive={true}
         ref={camera}
       />
-      <Button title='Foto' onPress={TomarFoto} />
+      <TouchableOpacity style={styles.captureButton} onPress={TomarFoto}>
+        <View style={styles.captureButtonInner} />
+      </TouchableOpacity>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
+  captureButton: {
+    position: 'absolute',
+    bottom: 50,
+    alignSelf: 'center',
+    width: 70,
+    height: 70,
+    borderRadius: 35,
+    backgroundColor: 'red',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  captureButtonInner: {
+    width: 60,
+    height: 60,
+    borderRadius: 30,
+    backgroundColor: 'red',
   },
   container: {
     flex: 1,
