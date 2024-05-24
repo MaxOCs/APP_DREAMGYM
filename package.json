@@ -19,6 +19,8 @@
     "axios": "^1.7.2",
     "expo": "^50.0.17",
     "expo-cli": "^4.0.17",
+    "lottie-ios": "^3.2.3",
+    "lottie-react-native": "^6.7.2",
     "react": "18.2.0",
     "react-native": "0.73.6",
     "react-native-gesture-handler": "~2.14.0",
