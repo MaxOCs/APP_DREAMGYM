@@ -4,6 +4,7 @@ import InputText from "../componentes/InputText";
 import { Text, View, StyleSheet } from "react-native";
 import colors from "../styles/colores";
 import { Screen } from "react-native-screens";
+import { Image } from "@rneui/themed";
 
 const HomeScreen = ({ navigation }) => {
   const [nombre, setNombre] = useState('');
@@ -19,6 +20,11 @@ const HomeScreen = ({ navigation }) => {
     }
     navigation.navigate('Principal', {screen: 'Inicio',params:{nombreUsuario:nombre}});
   };
+
+  //Funcion para navegar a LottieAnimatios
+    const handleLottie = () => {
+      navigation.navigate('LottieAnimations');
+    }
 
     // Método para manejar la navegación entre pantallas con parámetros
     const handleNavigation = (screenName, params = {}) => {
@@ -56,7 +62,8 @@ const HomeScreen = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <Text style={{ color: colors.Primaryblue, fontSize: 36 }}>GYMAPP</Text>
+      <Image source={require('../src/Logo.png')} style={{ width: 200, height: 200 }} />
+      <Text style={{ color: colors.Primaryblue, fontSize: 36, fontWeight: 'bold', }}>GymDream</Text>
       <InputText
         placeholder="Usuario"
         value={nombre}
@@ -75,7 +82,7 @@ const HomeScreen = ({ navigation }) => {
         Registrarme
       </Text>
       <BotonPrincipal 
-        onPress={handleLogin} // aqui se debe llamar el incio de sesion 
+        onPress={handleLottie} // aqui se debe llamar el incio de sesion 
         title="Iniciar sesión"  
       />
       {error && <Text style={{ color: 'red' }}>{error}</Text>}

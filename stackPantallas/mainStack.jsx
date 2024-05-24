@@ -11,6 +11,7 @@ import Start from "../views/Start";
 import Ejercicio from "../views/Ejercicio";
 import generarIMC from "../views/CrearNewIMC";
 import camara from "../views/Camara";
+import LottieAnimations from "../views/AnimationsBienvenida";
 import { createDrawerNavigator, DrawerContentScrollView, DrawerItemList, DrawerItem } from '@react-navigation/drawer';
 import colors from "../styles/colores";
 
@@ -89,6 +90,11 @@ const MainStack = () => {
                 <Stack.Screen
                     name="Camara"
                     component={camara}
+                    options={{ headerShown: false }}
+                />
+                 <Stack.Screen
+                    name="LottieAnimations"
+                    component={LottieAnimations}
                     options={{ headerShown: false }}
                 />
             </Stack.Navigator>

@@ -1,26 +1,21 @@
 import { TouchableOpacity } from 'react-native';
 import React, { useRef } from 'react';
 import { View, Text, StyleSheet, Animated, ScrollView } from 'react-native';
-import CategoryItem from './CategoriasItem';
+import LinearGradient from 'react-native-linear-gradient';
+import colors from '../styles/colores';
 
 const SliderItem = ({ navigation }) => {
-    const scrollX = useRef(new Animated.Value(0)).current;
+    
+    const scrollX = new Animated.Value(0);
 
-    const handleScroll = (event) => {
-        const { contentOffset, layoutMeasurement, contentSize } = event.nativeEvent;
-        const offsetX = contentOffset.x;
-        const contentWidth = contentSize.width;
-        const layoutWidth = layoutMeasurement.width;
-
-        const position = offsetX / (contentWidth - layoutWidth);
-        scrollX.setValue(position);
-    };
 
     //AGREGAMOS LA PANTALLA, EL NIVEL, CATEGORIA(SI ES EL CASO)
     const data = [
         { id: '1', text: 'FUERZA', screen: 'Nivel', category: 'Fuerza'},
         { id: '2', text: 'HIPERTROFIA', screen: 'Nivel', category: 'Hipertrofia'},
-        { id: '3', text: 'EJERCICIO', screen: 'Camara', category: 'Hipertrofia'},
+        { id: '3', text: 'EJERCICIO', screen: 'Nivel', category: 'Hipertrofia'},
+        { id: '4', text: 'Cardio', screen: 'Nivel', category: 'Hipertrofia'},
+        { id: '5', text: 'Mas opciones...', screen: 'Nivel', category: 'Hipertrofia'},
     ];
 
     //HANDLE PARA NAVEGAR ENTRE PANTALLAS Y OBTENER EL PARAMETRO
@@ -29,67 +24,70 @@ const SliderItem = ({ navigation }) => {
     };
 
     const renderItem = ({ item, index }) => {
-        const itemWidth = 200;
-        const totalWidth = data.length * itemWidth;
-        const inputRange = [index - 1, index, index + 1];
+        const itemWidth = 150;
+        const inputRange = [(index - 1) * itemWidth, index * itemWidth, (index + 1) * itemWidth];
         const outputRangeOpacity = [0.5, 1, 0.5];
         const outputRangeScale = [0.8, 1, 0.8];
-         //const inputRange = data.map((_, i) => i * interval); //calcular el rango de lo items para hacerlo dinamico 
-        //const outputRangeOpacity = data.map((_, i) => (i === index ? 1 : 0.5)); // Opacidad máxima para el elemento actual, 0.5 para los demás
-        //const outputRangeScale = data.map((_, i) => (i === index ? 1 : 0.8)); // Escala máxima para el elemento actual, 0.8 para los demás
-
+    
         const opacity = scrollX.interpolate({
             inputRange,
             outputRange: outputRangeOpacity,
             extrapolate: 'clamp',
         });
-
+    
         const scale = scrollX.interpolate({
             inputRange,
             outputRange: outputRangeScale,
             extrapolate: 'clamp',
         });
-
+    
         return (
+
             <TouchableOpacity
                 key={item.id}
                 style={[styles.itemContainer, { opacity, transform: [{ scale }] }]}
                 //AQUI SE PASAN LOS PARAMETROS DEL METODO handle
                 onPress={() => handleNavigation(item.screen, { category: item.category })}
                 >
-                <Text style={styles.text}>{item.text}</Text>
+                <LinearGradient
+                    colors={[colors.GradientStart, colors.GradientEnd]}
+                    style={styles.itemContainer}
+                >
+                    <Text style={styles.text}>{item.text}</Text>
+                </LinearGradient>
+                
             </TouchableOpacity>
         );
     };
 
     return (
         <View style={styles.container}>
-            <ScrollView
+            <Animated.FlatList
+                data={data}
+                renderItem={renderItem}
+                keyExtractor={(item) => item.id}
                 horizontal
-                pagingEnabled
                 showsHorizontalScrollIndicator={false}
-                onScroll={handleScroll}
-                scrollEventThrottle={12}
-            >
-                {data.map((item, index) => (
-                    <View key={item.id} style={styles.item}>
-                        {renderItem({ item, index })}
-                    </View>
-                ))}
-            </ScrollView>
+                onScroll={Animated.event(
+                    [{ nativeEvent: { contentOffset: { x: scrollX } } }],
+                    { useNativeDriver: true }
+                )}
+                scrollEventThrottle={16}
+            />
         </View>
     );
 };
 
 const styles = StyleSheet.create({
     container: {
-        width: 400,
+        marginVertical:15,
+        width: '100%',
     },
     itemContainer: {
         width: 200,
         height: 150,
         borderRadius: 10,
-        backgroundColor: 'lightgrey',
+        backgroundColor: colors.Primaryblue,
         justifyContent: 'center',
         alignItems: 'center',
     },
@@ -102,6 +100,7 @@ const styles = StyleSheet.create({
     text: {
         fontSize: 18,
         fontWeight: 'bold',
+        color: '#fff',
     },
 });
 
