@@ -62,23 +62,14 @@ const PantallaCamara = ({ navigation}) => {
         isActive={true}
         ref={camera}
       />
-<<<<<<< HEAD
-      <Button title='Foto' onPress={TomarFoto} />
-=======
       <TouchableOpacity style={styles.captureButton} onPress={TomarFoto}>
         <View style={styles.captureButtonInner} />
       </TouchableOpacity>
->>>>>>> Main
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-<<<<<<< HEAD
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
-=======
   captureButton: {
     position: 'absolute',
     bottom: 50,
@@ -95,7 +86,6 @@ const styles = StyleSheet.create({
     height: 60,
     borderRadius: 30,
     backgroundColor: 'red',
->>>>>>> Main
   },
   container: {
     flex: 1,
