@@ -1,19 +1,28 @@
+
 import React, { useEffect, useState } from "react";
-import { Text, StyleSheet, View } from 'react-native';
 import axios from 'axios';
 import webservice from '../webservice/rutaweb';
+import { Text, StyleSheet, View, Stack } from 'react-native';
 import AvatarUser from "../componentes/CabezeraUser";
 import SliderItem from "../componentes/Slider-Item";
 import FrasesContenedor from "../componentes/ContenedorFrases";
+import { Skeleton } from '@rneui/themed';
 
-const Inicio = ({ route, navigation }) => {
+const Inicio = ({ navigation, route }) => {
+
   const { prueba } = route.params;
   const [frases, setFrases] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [loadingFoto, setLoadingFoto] = useState(true);
   const [error, setError] = useState(null);
+  const [errorFoto, setErrorFoto] = useState(null);
+  const [FotoPerfil, setFotoPerfil] = useState('');
+
+  const nombreUsuario = route.params.nombreUsuario ? route.params.nombreUsuario : 'Usuario predetermido';
 
   console.log(prueba);
   const url = `${webservice}/frases`;
+  const urlfotoPerfil = `${webservice}/foto/${nombreUsuario}`;;
 
   useEffect(() => {
     const fetchFrases = async () => {
@@ -31,22 +40,56 @@ const Inicio = ({ route, navigation }) => {
     fetchFrases();
   }, []);
 
+  useEffect(() => {
+    const fetchFotoPerfil = async () => {
+      try {
+        const response = await axios.get(urlfotoPerfil);
+        const fotoDecodificada = decodeURIComponent(response.data.foto); // Decodificar la URL de la foto
+        setFotoPerfil(fotoDecodificada);
+      } catch (error) {
+        console.error(error);
+        setErrorFoto('Error al cargar la foto');
+      } finally {
+        setLoadingFoto(false);
+      }
+    };
+  
+    fetchFotoPerfil();
+  }, []);
+  
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>Bienvenido, {prueba}!</Text>
-      <View style={styles.section}>
-        <AvatarUser ImgenUrl={"https://randomuser.me/api/portraits/men/36.jpg"} />
-      </View>
+      {/* Sección de Bienvenida */}
+      {loadingFoto ? (
+        <View style={styles.section}>
+          <Skeleton animation="wave" width={200} height={200} />
+        </View>
+      ) : errorFoto ? (
+        <View style={styles.section}>
+            <Skeleton
+              //LinearGradientComponent={LinearGradient}
+              animation="wave"
+              width='100%'
+              height={50}
+            />
+            <Text>Error: {errorFoto}</Text>
+        </View>
+       
+      ) : (
+        <View style={styles.section}>
+          <AvatarUser ImgenUrl={FotoPerfil} NameUsuario={nombreUsuario} />
+        </View>
+      )}
 
-      <Text style={styles.quoteHeader}>Frases</Text>
+      {/* Sección de Frase */}
       {loading ? (
         <Text>Cargando frases...</Text>
       ) : error ? (
         <Text>Error: {error}</Text>
       ) : frases.length > 0 ? (
         frases.map((frase, index) => (
-          <View key={index} style={styles.quoteText}>
-            <Text>{frase.descripcion}</Text>
+          <View key={index} style={styles.frases}>
+            <FrasesContenedor Frase={frase.descripcion}></FrasesContenedor>
           </View>
         ))
       ) : (
@@ -61,8 +104,8 @@ const Inicio = ({ route, navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 20,
-    backgroundColor: '#f5f5f5',
+    padding: 10,
+    backgroundColor: '#DDF4F8',
   },
   section: {
     marginVertical: 20,
@@ -76,7 +119,13 @@ const styles = StyleSheet.create({
   quoteHeader: {
     fontSize: 20,
     fontWeight: 'bold',
-    marginBottom: 10,
+  },
+  frases:{
+    width: '100%',
+    height: 200,
+  },
+  nameText: {
+    fontSize: 18,
   },
   quoteText: {
     fontSize: 16,

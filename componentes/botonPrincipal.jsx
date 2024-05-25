@@ -1,32 +1,45 @@
-import React from "react";
-import colors from "../styles/colores";
-import { Text,StyleSheet,TouchableOpacity} from 'react-native';
+import React from 'react';
+import { Text, StyleSheet, TouchableOpacity } from 'react-native';
+import LinearGradient from 'react-native-linear-gradient';
+import colors from '../styles/colores';
 
 const BotonPrincipal = ({ onPress, title }) => {
-    return (
-      <TouchableOpacity style={styles.button} onPress={onPress}>
+  return (
+    <TouchableOpacity style={styles.buttonContainer} onPress={onPress}>
+      <LinearGradient
+        colors={[colors.GradientStart, colors.GradientEnd]}
+        style={styles.button}
+      >
         <Text style={styles.buttonText}>{title}</Text>
-      </TouchableOpacity>
-    );
-  };
+      </LinearGradient>
+    </TouchableOpacity>
+  );
+};
 
+const styles = StyleSheet.create({
+  buttonContainer: {
+    borderRadius: 25,
+    marginTop: 20,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.8,
+    shadowRadius: 2,
+    elevation: 5,
+  },
+  button: {
+    borderRadius: 25,
+    paddingHorizontal: 30,
+    paddingVertical: 15,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  buttonText: {
+    color: colors.TextoNegro,
+    fontSize: 18,
+    fontWeight: 'bold',
+  },
+});
 
-  const styles = StyleSheet.create({
-    button: {
-      backgroundColor: colors.Primaryblue, // Color de fondo del botón
-      borderRadius: 10, // Radio de los bordes
-      paddingHorizontal: 20, // Espaciado horizontal
-      paddingVertical: 10, // Espaciado vertical
-      alignItems: 'center', // Alineación horizontal de elementos
-      justifyContent: 'center', // Alineación vertical de elementos
-      marginTop: 20,
-    },
-    buttonText: {
-      color: colors.TextoTitulo, // Color del texto del botón
-      fontSize: 26, // Tamaño del texto
-      fontWeight: 'bold', // Peso de la fuente
-    },
-  });
+export default BotonPrincipal;
 
-export default BotonPrincipal
   
