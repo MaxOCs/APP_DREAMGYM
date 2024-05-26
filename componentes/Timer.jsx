@@ -1,11 +1,34 @@
 import React, { useState, useEffect } from 'react';
 import { Text, View, StyleSheet, TouchableOpacity } from 'react-native';
 
-const ContadorRegresivo = () => {
-  const [tiempoRestante, setTiempoRestante] = useState(180); // 3 minutos en segundos
+const ContadorRegresivo = ({ tiempo, onFin }) => {
+  const [tiempoRestante, setTiempoRestante] = useState(tiempo);
   const [iniciado, setIniciado] = useState(false);
-  const [parar, setParar] = useState(false);
-  const [botonText,setbutonText] = useState('Iniciar');
+  const [botonText, setBotonText] = useState('Iniciar');
+
+  useEffect(() => {
+    let intervalo;
+    if (iniciado) {
+      intervalo = setInterval(() => {
+        setTiempoRestante(prevTiempo => {
+          if (prevTiempo === 1) {
+            clearInterval(intervalo);
+            setIniciado(false);
+            setBotonText('Iniciar');
+            onFin();
+            return 0;
+          } else {
+            return prevTiempo - 1;
+          }
+        });
+      }, 1000);
+    }
+    return () => clearInterval(intervalo);
+  }, [iniciado]);
+
+  useEffect(() => {
+    setTiempoRestante(tiempo);
+  }, [tiempo]);
 
   const iniciarContador = () => {
     setIniciado(true);
@@ -13,32 +36,9 @@ const ContadorRegresivo = () => {
 
   const pararContador = () => {
     setIniciado(false);
-    setbutonText('Iniciar'); 
+    setBotonText('Iniciar');
   };
 
-  useEffect(() => {
-    if (iniciado) {
-      const intervalo = setInterval(() => {
-        setTiempoRestante(prevTiempo => {
-          if (prevTiempo === 0) {
-            clearInterval(intervalo);
-            //reseteo del contador para volver a iniciarlo
-            setIniciado(false);
-            setTiempoRestante(180);
-            setbutonText('Iniciar');
-            return 0;    
-          } else {
-            setbutonText('Parar');
-            return prevTiempo - 1;
-          }
-        });
-      }, 1000);
-
-      return () => clearInterval(intervalo);
-    }
-  }, [iniciado]);
-
-  // Función para formatear el tiempo restante a formato MM:SS
   const formatoTiempo = (segundos) => {
     const minutos = Math.floor(segundos / 60);
     const segundosRestantes = segundos % 60;
@@ -49,9 +49,9 @@ const ContadorRegresivo = () => {
     <View style={styles.contenedor}>
       <Text style={styles.texto}>Tiempo restante:</Text>
       <Text style={styles.textoTiempo}>{formatoTiempo(tiempoRestante)}</Text>
-        <TouchableOpacity style={styles.boton} onPress={iniciado ? pararContador :iniciarContador}>
-          <Text style={styles.textoBoton}>{botonText}</Text>
-        </TouchableOpacity>
+      <TouchableOpacity style={styles.boton} onPress={iniciado ? pararContador : iniciarContador}>
+        <Text style={styles.textoBoton}>{botonText}</Text>
+      </TouchableOpacity>
     </View>
   );
 };
@@ -76,7 +76,7 @@ const styles = StyleSheet.create({
     width: 100,
     height: 100,
     backgroundColor: 'blue',
-    borderRadius: 50 ,
+    borderRadius: 50,
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -88,4 +88,3 @@ const styles = StyleSheet.create({
 });
 
 export default ContadorRegresivo;
-

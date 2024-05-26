@@ -4,17 +4,17 @@ import { View, Text, StyleSheet, Animated, ScrollView } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import colors from '../styles/colores';
 
-const SliderItem = ({ navigation }) => {
+const SliderItem = ({ navigation, nombreUsuario }) => {
     
-    const scrollX = new Animated.Value(0);
+    const scrollX = new Animated.Value(0);  
 
 
     //AGREGAMOS LA PANTALLA, EL NIVEL, CATEGORIA(SI ES EL CASO)
     const data = [
         { id: '1', text: 'FUERZA', screen: 'Nivel', category: 'Fuerza'},
         { id: '2', text: 'HIPERTROFIA', screen: 'Nivel', category: 'Hipertrofia'},
-        { id: '3', text: 'EJERCICIO', screen: 'Nivel', category: 'Hipertrofia'},
-        { id: '4', text: 'Cardio', screen: 'Nivel', category: 'Hipertrofia'},
+        { id: '3', text: 'I.M.C', screen: 'IMC', nombreUsuario},
+        { id: '4', text: 'Cardio', screen: 'marcapasos'},
         { id: '5', text: 'Mas opciones...', screen: 'Nivel', category: 'Hipertrofia'},
     ];
 
@@ -47,7 +47,7 @@ const SliderItem = ({ navigation }) => {
                 key={item.id}
                 style={[styles.itemContainer, { opacity, transform: [{ scale }] }]}
                 //AQUI SE PASAN LOS PARAMETROS DEL METODO handle
-                onPress={() => handleNavigation(item.screen, { category: item.category })}
+                onPress={() => handleNavigation(item.screen, { category: item.category})}
                 >
                 <LinearGradient
                     colors={[colors.GradientStart, colors.GradientEnd]}
