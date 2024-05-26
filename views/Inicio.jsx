@@ -62,7 +62,7 @@ const Inicio = ({ navigation, route }) => {
       {/* Sección de Bienvenida */}
       {loadingFoto ? (
         <View style={styles.section}>
-          <Skeleton animation="wave" width={200} height={200} />
+          <Skeleton animation="wave" width={400} height={50} />
         </View>
       ) : errorFoto ? (
         <View style={styles.section}>
@@ -112,7 +112,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 10,
-    backgroundColor: '#DDF4F8',
+    backgroundColor: '#1ADAFC',
   },
   section: {
     marginVertical: 20, // Espacio entre secciones
