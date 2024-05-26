@@ -13,7 +13,7 @@ const SliderItem = ({ navigation }) => {
     const data = [
         { id: '1', text: 'FUERZA', screen: 'Nivel', category: 'Fuerza'},
         { id: '2', text: 'HIPERTROFIA', screen: 'Nivel', category: 'Hipertrofia'},
-        { id: '3', text: 'EJERCICIO', screen: 'Nivel', category: 'Hipertrofia'},
+        { id: '3', text: 'I.M.C', screen: 'IMC'},
         { id: '4', text: 'Cardio', screen: 'Nivel', category: 'Hipertrofia'},
         { id: '5', text: 'Mas opciones...', screen: 'Nivel', category: 'Hipertrofia'},
     ];

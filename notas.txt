@@ -1,5 +1,9 @@
 Ejecuta este comando
 npm install axios
+
+//PARA LAS NOTIFICACIONES
+npm install react-native-push-notification
+npm install moment
 npm install react-native-linear-gradient
 npm i react-native-vision-camera
 npm install @react-native-camera-roll/camera-roll --save

@@ -88,6 +88,10 @@ const MainStack = () => {
                     options={{ headerShown: false }}
                 />
                 <Stack.Screen
+                    name="IMC"
+                    component={generarIMC}
+                />
+                <Stack.Screen
                     name="Camara"
                     component={camara}
                     options={{ headerShown: false }}

@@ -1,17 +1,23 @@
+import PushNotification from "react-native-push-notification";//esto es de noti
+import moment from "moment";
+import { Text, View, StyleSheet, TouchableOpacity } from "react-native";
 import React, { useState,useEffect } from "react";
 import BotonPrincipal from "../componentes/botonPrincipal";
 import InputText from "../componentes/InputText";
-import { Text, View, StyleSheet } from "react-native";
 import colors from "../styles/colores";
+import webservice from "../webservice/rutaweb";
+
+
 import { Screen } from "react-native-screens";
 import { Image } from "@rneui/themed";
 
 const HomeScreen = ({ navigation }) => {
   const [nombre, setNombre] = useState('');
-  const [contraseña, setContraseña] = useState('');
+  const [password, setPassword] = useState('');
   const [error, setError] = useState('');
 
-  //Funcion login sin backend (No borrar!!!! me sirve para saltarme el login)
+
+  //Funcion login sin backend (No borrar!!!! vete alv joto me sirve para saltarme el login)
   const handleLogin = () => {
     console.log('Nombre de usuario:', nombre); // Verifica el valor de nombre
     if (nombre === '') {
@@ -58,7 +64,7 @@ const HomeScreen = ({ navigation }) => {
       }
     };
 
-  
+
 
   return (
     <View style={styles.container}>
@@ -72,9 +78,14 @@ const HomeScreen = ({ navigation }) => {
       <InputText
         placeholder="Contraseña"
         secureTextEntry
-        value={contraseña}
-        onChangeText={setContraseña}
+        value={password}
+        onChangeText={setPassword}
       />
+      <TouchableOpacity onPress={() => handleNavigation("Registro")} style={{ marginBottom: 20 }}>
+        <Text style={{ color: colors.Primaryblue, fontSize: 17 }}>Registrarme</Text>
+      </TouchableOpacity>
+      <BotonPrincipal onPress={() => navigation.navigate('Principal', { prueba: "josue" })} title="Iniciar sesión" />
+      {error && <Text>{error}</Text>}
       <Text
         onPress={() => navigation.navigate("Registro")}
         style={{ color: colors.Primaryblue, fontSize: 17 }}
@@ -82,7 +93,7 @@ const HomeScreen = ({ navigation }) => {
         Registrarme
       </Text>
       <BotonPrincipal 
-        onPress={handleLottie} // aqui se debe llamar el incio de sesion 
+        onPress={handleLogin2} // aqui se debe llamar el incio de sesion 
         title="Iniciar sesión"  
       />
       {error && <Text style={{ color: 'red' }}>{error}</Text>}

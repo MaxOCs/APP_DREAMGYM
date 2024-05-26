@@ -96,17 +96,10 @@ const Inicio = ({ navigation, route }) => {
         <Text>No hay frases disponibles</Text>
       )}
 
-      {/* Sección de Categorías en forma horizontal */}
       <SliderItem navigation={navigation} />
-
-
-
     </View>
-
-
   );
 };
-
 
 const styles = StyleSheet.create({
   container: {
@@ -115,10 +108,16 @@ const styles = StyleSheet.create({
     backgroundColor: '#DDF4F8',
   },
   section: {
-    marginVertical: 20, // Espacio entre secciones
+    marginVertical: 20,
   },
-  welcomeText: {
-    fontSize: 24,
+  quoteContainer: {
+    flexGrow: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingVertical: 20,
+  },
+  quoteHeader: {
+    fontSize: 20,
     fontWeight: 'bold',
   },
   frases:{
@@ -131,24 +130,8 @@ const styles = StyleSheet.create({
   quoteText: {
     fontSize: 16,
     fontStyle: 'italic',
-  },
-  categoryHeader: {
-    fontSize: 20,
-    fontWeight: 'bold',
-  },
-  horizontalCategories: {
-    flexDirection: 'row', // Disposición horizontal
-    justifyContent: 'space-between', // Espacio entre categorías
-    alignItems: 'center', // Alineación vertical
-  },
-  categoryBlock: {
-    backgroundColor: '#e0e0e0', // Color de fondo para el bloque
-    width: 100, // Tamaño del cuadrado
-    height: 100, // Tamaño del cuadrado
-    justifyContent: 'center', // Centra el texto en el bloque
-    alignItems: 'center', // Centra el texto en el bloque
-    borderRadius: 10, // Bordes redondeados
-    marginHorizontal: 10, // Espacio entre bloques
+    marginBottom: 5,
   },
 });
+
 export default Inicio;
