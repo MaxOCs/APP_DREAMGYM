@@ -53,12 +53,16 @@ const Start = ({ route, navigation }) => {
 
     return (
         <View style={styles.container}>
-            <ImagenesComponente uri={imageUrl} width={400} height={400} />
-            <Text>{titulo}</Text>
+            <View>
+            <ImagenesComponente uri={imageUrl} width={400} height={450} />
+            </View>
+            <View style={styles.textoYBotonContainer}>
+            <Text style={styles.titulo}>{titulo}</Text>
             <Text>
                 {loading ? 'Cargando...' : error ? `Error: ${error}` : `NÚMERO DE EJERCICIOS: ${ejercicioCount !== null ? ejercicioCount : 'No disponible'}`}
             </Text>
-            <BotonPrincipal onPress={() => navigation.navigate('Ejercicio')} title="Comenzar" />
+            <BotonPrincipal style={styles.tamañoBoton} onPress={() => navigation.navigate('Ejercicio')} title="Comenzar" />
+            </View>
         </View>
     );
 };
@@ -88,8 +92,26 @@ const imagenCaso = (category, level) => {
 
 const styles = StyleSheet.create({
     container: {
-        padding: 16,
     },
+    containerImagen:
+    {
+
+    },
+    textoYBotonContainer: {
+        marginTop: 60,         
+        alignItems: 'center',  
+      },
+      titulo: {
+        fontSize: 24,           
+        fontWeight: 'bold',   
+        marginBottom: 10,      
+        textAlign: 'center',    
+      },
+      tamañoBoton:
+      {
+        width: 350,   // Ancho del botón
+        height: 63,   // Alto del botón
+      }
 });
 
 export default Start;

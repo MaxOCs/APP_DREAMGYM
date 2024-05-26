@@ -4,50 +4,38 @@ import BotonPrincipal from '../componentes/botonPrincipal';
 import InputText from '../componentes/InputText';
 import colors from '../styles/colores';
 
-const NuevoIMC = ({ navigation }) => {
+const NuevoIMC = ({ navigation, route }) => {
+
+
+  const { nombreUsuario } = route.params || { nombreUsuario: 'Usuario predeterminado' };
   const [altura, setAltura] = useState('');
   const [peso, setPeso] = useState('');
-  const [resultado, setResultado] = useState('');
+  const [resultado, setResultado] = useState(0);
   const [error, setError] = useState('');
 
+  console.log(nombreUsuario);
+  
+  /* 
+  const datos = new URLSearchParams({
+    nombre,
+    password,
+    foto: encodeURIComponent(foto), // Asegúrate de codificar la URL de la foto
+  }).toString();
 
-  const handleRegistro = async () => {
-    
-    
-    if (!altura || !peso || isNaN(parseFloat(resultado))) {
-      setError('Por favor calcula el IMC antes de registrar.');
-      return;
-    }
-  
-    const datos = new URLSearchParams({
-        altura: parseFloat(altura),
-        peso: parseFloat(peso),
-        imc: parseFloat(resultado),
-    }).toString();
-  
-    const url = `${webservice}/registro?${datos}`;
-  
-    try {
-      const response = await fetch(url, {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
-  
-      if (response.ok) {
-        navigation.navigate('Bienvenido');
-      } else {
-        const errorData = await response.json();
-        setError(errorData.error || 'Error en el registro');
+  useEffect(() => {
+    const registrarIMC = async () => {
+      try {
+        const response = await axios.get(url); 
+        setResultado(response.data.ejercicio); // Asegúrate de acceder a la propiedad 'ejercicio'
+      } catch (error) {
+        console.error(error);
       }
-    } catch (error) {
-      console.error('Error de red:', error.message);
-      setError('Error de red');
-    }
-  };
-  
+    };
 
+    registrarIMC();
+  }, []);
+
+*/
 
   const calcularIMC = () => {
 
@@ -67,6 +55,7 @@ const NuevoIMC = ({ navigation }) => {
       {/* TÍTULO DE GYMAPP */}
       <Text style={{ color: colors.Primaryblue, fontSize: 20 }}>Índice de masa corporal</Text>
       {/* INPUTS */}
+      <Text>{nombreUsuario}</Text>
       <InputText
         placeholder="Altura (cm)"
         keyboardType="numeric"
