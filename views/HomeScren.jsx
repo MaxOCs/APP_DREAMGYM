@@ -6,8 +6,6 @@ import BotonPrincipal from "../componentes/botonPrincipal";
 import InputText from "../componentes/InputText";
 import colors from "../styles/colores";
 import webservice from "../webservice/rutaweb";
-
-
 import { Screen } from "react-native-screens";
 import { Image } from "@rneui/themed";
 
@@ -81,11 +79,6 @@ const HomeScreen = ({ navigation }) => {
         value={password}
         onChangeText={setPassword}
       />
-      <TouchableOpacity onPress={() => handleNavigation("Registro")} style={{ marginBottom: 20 }}>
-        <Text style={{ color: colors.Primaryblue, fontSize: 17 }}>Registrarme</Text>
-      </TouchableOpacity>
-      <BotonPrincipal onPress={() => navigation.navigate('Principal', { prueba: "josue" })} title="Iniciar sesión" />
-      {error && <Text>{error}</Text>}
       <Text
         onPress={() => navigation.navigate("Registro")}
         style={{ color: colors.Primaryblue, fontSize: 17 }}
@@ -93,7 +86,7 @@ const HomeScreen = ({ navigation }) => {
         Registrarme
       </Text>
       <BotonPrincipal 
-        onPress={handleLogin2} // aqui se debe llamar el incio de sesion 
+        onPress={handleLogin} // aqui se debe llamar el incio de sesion 
         title="Iniciar sesión"  
       />
       {error && <Text style={{ color: 'red' }}>{error}</Text>}
