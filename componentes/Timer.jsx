@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Text, View, StyleSheet, TouchableOpacity } from 'react-native';
 
 const ContadorRegresivo = ({ tiempo, onFin }) => {
-  const [tiempoRestante, setTiempoRestante] = useState(tiempo);
+  const [tiempoRestante, setTiempoRestante] = useState(60); // Iniciar con 60 segundos
   const [iniciado, setIniciado] = useState(false);
   const [botonText, setBotonText] = useState('Iniciar');
 
@@ -11,7 +11,7 @@ const ContadorRegresivo = ({ tiempo, onFin }) => {
     if (iniciado) {
       intervalo = setInterval(() => {
         setTiempoRestante(prevTiempo => {
-          if (prevTiempo === 1) {
+          if (prevTiempo <= 1) {
             clearInterval(intervalo);
             setIniciado(false);
             setBotonText('Iniciar');
@@ -24,19 +24,23 @@ const ContadorRegresivo = ({ tiempo, onFin }) => {
       }, 1000);
     }
     return () => clearInterval(intervalo);
-  }, [iniciado]);
+  }, [iniciado, onFin]);
 
-  useEffect(() => {
-    setTiempoRestante(tiempo);
-  }, [tiempo]);
+useEffect(() => {
+  if (!iniciado) {
+    setTiempoRestante(tiempo); // Reiniciar a 60 segundos (1 minuto)
+  }
+}, [iniciado]);
 
-  const iniciarContador = () => {
-    setIniciado(true);
-  };
 
-  const pararContador = () => {
-    setIniciado(false);
-    setBotonText('Iniciar');
+  const iniciarPararContador = () => {
+    if (iniciado) {
+      setIniciado(false);
+      setBotonText('Iniciar');
+    } else {
+      setIniciado(true);
+      setBotonText('Parar');
+    }
   };
 
   const formatoTiempo = (segundos) => {
@@ -49,7 +53,7 @@ const ContadorRegresivo = ({ tiempo, onFin }) => {
     <View style={styles.contenedor}>
       <Text style={styles.texto}>Tiempo restante:</Text>
       <Text style={styles.textoTiempo}>{formatoTiempo(tiempoRestante)}</Text>
-      <TouchableOpacity style={styles.boton} onPress={iniciado ? pararContador : iniciarContador}>
+      <TouchableOpacity style={styles.boton} onPress={iniciarPararContador}>
         <Text style={styles.textoBoton}>{botonText}</Text>
       </TouchableOpacity>
     </View>

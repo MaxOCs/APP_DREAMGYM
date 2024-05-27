@@ -4,6 +4,7 @@ import webservice from '../webservice/rutaweb'
 import BotonPrincipal from '../componentes/botonPrincipal';
 import { Avatar,Icon } from '@rneui/base';
 import { CameraRoll } from '@react-native-camera-roll/camera-roll';
+import Toast from 'react-native-toast-message';
 
 const Registro = ({ navigation }) => {
   const [takefoto, setTakeFoto] = useState(null);
@@ -13,6 +14,8 @@ const Registro = ({ navigation }) => {
   const [foto,setfoto]=useState('')
   const [error, setError] = useState('');
   const [imagen, setImagen] = useState('https://img.freepik.com/psd-gratis/ilustracion-3d-avatar-o-perfil-humano_23-2150671142.jpg?size=338&ext=jpg&ga=GA1.1.1788068356.1716163200&semt=ais_user');
+
+
 
   const handleRegistro = async () => {
     if (!nombre || !password || !foto) {
@@ -39,7 +42,13 @@ const Registro = ({ navigation }) => {
       });
   
       if (response.ok) {
-        navigation.navigate('Bienvenido');
+        Toast.show({
+          type: 'success',
+          text1: 'Disfruta de tus entrenamientos',
+        });
+        setTimeout(() => {
+          navigation.navigate('Bienvenido');
+        }, 1000);
       } else {
         const errorData = await response.json();
         setError(errorData.error || 'Error en el registro');
@@ -83,6 +92,8 @@ const Registro = ({ navigation }) => {
     navigation.navigate('Camara');
     setTakeFoto(true); // Actualizamos el estado takefoto aquí
   };
+   
+
   
   return (
     <View style={styles.container}>
@@ -121,6 +132,7 @@ const Registro = ({ navigation }) => {
         />
       </View>
       <BotonPrincipal onPress={handleRegistro} title="Registrarme" />
+
       {error && <Text style={styles.error}>{error}</Text>}
     </View>
   );
