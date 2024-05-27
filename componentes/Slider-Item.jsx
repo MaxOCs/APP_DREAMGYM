@@ -13,15 +13,16 @@ const SliderItem = ({ navigation, nombreUsuario }) => {
     const data = [
         { id: '1', text: 'FUERZA', screen: 'Nivel', category: 'Fuerza'},
         { id: '2', text: 'HIPERTROFIA', screen: 'Nivel', category: 'Hipertrofia'},
-        { id: '3', text: 'I.M.C', screen: 'IMC', nombreUsuario},
+        { id: '3', text: 'Nuevo I.M.C', screen: 'IMC', params: {nombreUsuario}},
         { id: '4', text: 'Cardio', screen: 'marcapasos'},
-        { id: '5', text: 'Mas opciones...', screen: 'Nivel', category: 'Hipertrofia'},
+        { id: '5', text: 'Mi historial IMC', screen: 'historialimc', params: {nombreUsuario}},
     ];
 
     //HANDLE PARA NAVEGAR ENTRE PANTALLAS Y OBTENER EL PARAMETRO
     const handleNavigation = (screenName,  params = {}) => {
-        navigation.navigate(screenName, params);
-    };
+    
+            navigation.navigate(screenName, params);
+        };
 
     const renderItem = ({ item, index }) => {
         const itemWidth = 150;
@@ -47,7 +48,7 @@ const SliderItem = ({ navigation, nombreUsuario }) => {
                 key={item.id}
                 style={[styles.itemContainer, { opacity, transform: [{ scale }] }]}
                 //AQUI SE PASAN LOS PARAMETROS DEL METODO handle
-                onPress={() => handleNavigation(item.screen, { category: item.category})}
+                onPress={() => handleNavigation(item.screen, { category: item.category, nombreUsuario: nombreUsuario })}
                 >
                 <LinearGradient
                     colors={[colors.GradientStart, colors.GradientEnd]}

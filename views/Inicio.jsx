@@ -96,7 +96,7 @@ const Inicio = ({ navigation, route }) => {
         <Text>No hay frases disponibles</Text>
       )}
 
-      <SliderItem navigation={navigation} />
+      <SliderItem navigation={navigation} nombreUsuario={nombreUsuario} />
     </View>
   );
 };

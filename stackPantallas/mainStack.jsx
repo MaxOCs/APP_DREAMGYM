@@ -15,7 +15,7 @@ import LottieAnimations from "../views/AnimationsBienvenida";
 import marcaPasos from "../views/MarcaPasos";
 import { createDrawerNavigator, DrawerContentScrollView, DrawerItemList, DrawerItem } from '@react-navigation/drawer';
 import colors from "../styles/colores";
-
+import HistorialIMC from "../views/HistorialIMC";
 
 const Stack = createNativeStackNavigator()
 const Drawer = createDrawerNavigator()
@@ -91,16 +91,24 @@ const MainStack = () => {
                 <Stack.Screen
                     name="IMC"
                     component={generarIMC}
+                    options={{ headerShown: false }}
                 />
                 <Stack.Screen
                     name="marcapasos"
                     component={marcaPasos}
+                    options={{ headerShown: false }}
+                />
+                 <Stack.Screen
+                    name="historialimc"
+                    component={HistorialIMC}
+                    options={{ headerShown: false }}
                 />
                 <Stack.Screen
                     name="Camara"
                     component={camara}
                     options={{ headerShown: false }}
                 />
+                
                  <Stack.Screen
                     name="LottieAnimations"
                     component={LottieAnimations}
