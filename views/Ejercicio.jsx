@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState} from 'react';
 import { Text, StyleSheet, View, TouchableOpacity } from 'react-native';
 import ImagenesComponente from "../componentes/Imagenes";
 import ContadorRegresivo from "../componentes/Timer";
@@ -9,7 +9,8 @@ const Ejercicio = ({ navigation }) => {
   const [ejercicios, setEjercicios] = useState([]);
   const [ejercicioActual, setEjercicioActual] = useState(0);
   const [habilitarSiguiente, setHabilitarSiguiente] = useState(false);
-  
+  const [reiniciarContador, setReiniciarContador] = useState(false);
+
   const url = `${webservice}/getEjercicios`;
 
   useEffect(() => {
@@ -35,10 +36,12 @@ const Ejercicio = ({ navigation }) => {
     if (ejercicioActual < ejercicios.length - 1) {
       setEjercicioActual(ejercicioActual + 1);
       setHabilitarSiguiente(false);
+      setReiniciarContador(true); // Activar reinicio del contador
     } else {
       console.log('No hay más ejercicios');
     }
   };
+
 
   // Manejar el fin del contador
   const manejarFinContador = () => {

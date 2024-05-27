@@ -1,61 +1,75 @@
-import React, { useState } from 'react';
-import { Text, View, StyleSheet } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { Text, View, StyleSheet, Alert } from 'react-native';
 import BotonPrincipal from '../componentes/botonPrincipal';
 import InputText from '../componentes/InputText';
 import colors from '../styles/colores';
+import axios from 'axios';
+import webservice from '../webservice/rutaweb';
 
-const NuevoIMC = ({ navigation, route }) => {
-
-
-  const { nombreUsuario } = route.params || { nombreUsuario: 'Usuario predeterminado' };
+const NuevoIMC = ({ route }) => {
+  const { nombreUsuario } = route.params;
   const [altura, setAltura] = useState('');
   const [peso, setPeso] = useState('');
-  const [resultado, setResultado] = useState(0);
+  const [userIngresado, setUserIngresado] = useState(0);
+  const [resultado, setResultado] = useState('');
   const [error, setError] = useState('');
 
-  console.log(nombreUsuario);
-  
-  /* 
-  const datos = new URLSearchParams({
-    nombre,
-    password,
-    foto: encodeURIComponent(foto), // Asegúrate de codificar la URL de la foto
-  }).toString();
-
+  // Obtener el ID de usuario al cargar el componente
   useEffect(() => {
-    const registrarIMC = async () => {
+    const getUser = async () => {
       try {
-        const response = await axios.get(url); 
-        setResultado(response.data.ejercicio); // Asegúrate de acceder a la propiedad 'ejercicio'
+        const response = await axios.get(`${webservice}/userIngresado/${nombreUsuario}`);
+        setUserIngresado(response.data.usuario);
       } catch (error) {
-        console.error(error);
+        console.error('Error al obtener el ID de usuario:', error);
+        setError('Error al obtener el ID de usuario');
       }
     };
+    getUser();
+  }, [nombreUsuario]);
 
-    registrarIMC();
-  }, []);
-
-*/
-
+  // Calcular el IMC
   const calcularIMC = () => {
-
-    const alturaMetros = parseFloat(altura) / 100; 
+    const alturaMetros = parseFloat(altura) / 100;
     const pesoKg = parseFloat(peso);
 
     if (!isNaN(alturaMetros) && !isNaN(pesoKg) && alturaMetros > 0 && pesoKg > 0) {
       const imc = pesoKg / (alturaMetros * alturaMetros);
-      setResultado(imc.toFixed(1)); 
+      setResultado(imc.toFixed(1).toString());
     } else {
       setResultado('Por favor ingresa valores válidos');
     }
   };
 
+  // METODO PARA REGISTRAR EL IMC
+  const registrarIMC = async () => {
+    try {
+      const response = await axios.get(`${webservice}/registroIMC/${userIngresado}`, {
+        params: {
+          altura: altura,
+          peso: peso,
+          imc: resultado,
+        },
+      });
+      console.log('IMC registrado correctamente:', response.data);
+    } catch (error) {
+      console.error('Error al registrar el IMC:', error);
+      Alert.alert('Error', 'Error al registrar el IMC. Intenta nuevamente.'); //ALERTA PAL ERROR
+    }
+  };
+
+  //Este metodo es para Calcular el IMC, y despues esperar un tiempo para el REGISTRARIMC()
+  const handleGenerarYGuardar = () => {
+    calcularIMC();
+    setTimeout(() => {
+      registrarIMC();
+    }, 1000); 
+  };
+
   return (
     <View style={styles.container}>
-      {/* TÍTULO DE GYMAPP */}
-      <Text style={{ color: colors.Primaryblue, fontSize: 20 }}>Índice de masa corporal</Text>
-      {/* INPUTS */}
-      <Text>{nombreUsuario}</Text>
+      <Text style={{ color: colors.Primaryblue, fontSize: 20 }}>Calcular mi I.M.C</Text>
+      <Text style={styles.text}>Indice de Masa Corporal</Text>
       <InputText
         placeholder="Altura (cm)"
         keyboardType="numeric"
@@ -68,10 +82,8 @@ const NuevoIMC = ({ navigation, route }) => {
         value={peso}
         onChangeText={setPeso}
       />
-      {/* RESULTADO DEL IMC */}
       <Text style={{ color: colors.Primaryblue, fontSize: 17 }}>RESULTADO: {resultado}</Text>
-      {/* BOTÓN PARA CALCULAR EL IMC */}
-      <BotonPrincipal onPress={calcularIMC} title="Generar" />
+      <BotonPrincipal onPress={handleGenerarYGuardar} title="Generar" />
     </View>
   );
 };
@@ -81,7 +93,11 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    marginBottom: 50, // Espacio debajo del título
+    marginBottom: 50,
+  },
+  text: {
+    fontSize: 16,
+    marginBottom: 20,
   },
 });
 
