@@ -16,24 +16,28 @@ import marcaPasos from "../views/MarcaPasos";
 import { createDrawerNavigator, DrawerContentScrollView, DrawerItemList, DrawerItem } from '@react-navigation/drawer';
 import colors from "../styles/colores";
 import HistorialIMC from "../views/HistorialIMC";
+import Toast from 'react-native-toast-message';
+import { useNavigation } from '@react-navigation/native';
 
 const Stack = createNativeStackNavigator()
 const Drawer = createDrawerNavigator()
 
 const CustomDrawerContent = (props) => {
+    const navigation = useNavigation();
+
     return (
         <DrawerContentScrollView {...props}>
             <DrawerItemList {...props} />
             <DrawerItem
                 label="Perfil"
                 onPress={() => {
-                    // accion ir a la pantalla perfil
+                    
                 }}
             />
             <DrawerItem
                 label="Cerrar sesión"
                 onPress={() => {
-                    // Metodo para cerrar sesion
+                    navigation.navigate('Bienvenido');
                 }}
             />
         </DrawerContentScrollView>
@@ -115,6 +119,7 @@ const MainStack = () => {
                     options={{ headerShown: false }}
                 />
             </Stack.Navigator>
+            <Toast ref={(ref) => Toast.setRef(ref)} />
         </NavigationContainer>
     );
 }

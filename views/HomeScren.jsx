@@ -16,6 +16,16 @@ const HomeScreen = ({ navigation }) => {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
 
+  // pa limpiar los inputs
+  useEffect(() => {
+    const limpiar = navigation.addListener('focus', () => {
+      setNombre('');
+      setPassword('');
+      setError('');
+    });
+
+    return limpiar;
+  }, [navigation]);
 
   //Funcion login sin backend (No borrar!!!! vete alv joto me sirve para saltarme el login)
   const handleLogin = () => {
