@@ -1,3 +1,4 @@
+import { useNavigation } from '@react-navigation/native';
 import React from "react";
 import { View, Text, StyleSheet, Image, Dimensions } from "react-native";
 import Onboarding from 'react-native-onboarding-swiper';
@@ -5,10 +6,17 @@ import LottieView from 'lottie-react-native';
 
 const { width, height } = Dimensions.get('window');
 
+const handleHome = () => { //areglar esto!!!!!!
+    const navigation = useNavigation();
+    navigation.navigate('Principal');
+}
+
 const LottieAnimations = () => {
     return (
         <View style={styles.contenedor}>
             <Onboarding
+                onDone={handleHome}                                    
+                onSkip={handleHome}
                 containerStyles={{ paddingHorizontal: 15 }}
                 pages={[
                     {
