@@ -1,12 +1,9 @@
-import PushNotification from "react-native-push-notification";//esto es de noti
-import moment from "moment";
 import { Text, View, StyleSheet, TouchableOpacity } from "react-native";
 import React, { useState,useEffect } from "react";
 import BotonPrincipal from "../componentes/botonPrincipal";
 import InputText from "../componentes/InputText";
 import colors from "../styles/colores";
 import webservice from "../webservice/rutaweb";
-import { Screen } from "react-native-screens";
 import { Image } from "@rneui/themed";
 
 const HomeScreen = ({ navigation }) => {
@@ -37,7 +34,7 @@ const HomeScreen = ({ navigation }) => {
 
   //Funcion para navegar a LottieAnimatios
     const handleLottie = () => {
-      navigation.navigate('LottieAnimations');
+      navigation.navigate('LottieAnimations',{nombreUsuario:nombre});
     }
 
     // Método para manejar la navegación entre pantallas con parámetros
@@ -96,7 +93,7 @@ const HomeScreen = ({ navigation }) => {
         Registrarme
       </Text>
       <BotonPrincipal 
-        onPress={handleLogin} // aqui se debe llamar el incio de sesion 
+        onPress={handleLottie} // aqui se debe llamar el incio de sesion 
         title="Iniciar sesión"  
       />
       {error && <Text style={{ color: 'red' }}>{error}</Text>}
