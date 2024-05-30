@@ -17,7 +17,6 @@ import { createDrawerNavigator, DrawerContentScrollView, DrawerItemList, DrawerI
 import colors from "../styles/colores";
 import HistorialIMC from "../views/HistorialIMC";
 import Toast from 'react-native-toast-message';
-import { useNavigation } from '@react-navigation/native';
 
 const Stack = createNativeStackNavigator()
 const Drawer = createDrawerNavigator()
@@ -30,7 +29,7 @@ const CustomDrawerContent = (props) => {
             <DrawerItem
                 label="Perfil"
                 onPress={() => {
-                    
+                    // accion ir a la pantalla perfil
                 }}
             />
             <DrawerItem
