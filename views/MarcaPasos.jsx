@@ -1,47 +1,56 @@
+// PedometerCounter.js
 import React, { useEffect, useState } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
-import axios from 'axios';
-import ImagenesComponente from "../componentes/Imagenes";
-import webservice from "../webservice/rutaweb";
-import BotonPrincipal from "../componentes/botonPrincipal";
+import { Text, View, StyleSheet } from 'react-native';
+import Pedometer from 'react-native-pedometer';
 
-const Start = ({ route, navigation }) => {
+const PedometerCounter = () => {
+  const [stepCount, setStepCount] = useState(0);
+  const [isPedometerAvailable, setIsPedometerAvailable] = useState('checking');
 
+  useEffect(() => {
+    const startPedometer = async () => {
+      const isAvailable = await Pedometer.isAvailableAsync();
+      setIsPedometerAvailable(isAvailable ? 'available' : 'unavailable');
 
-    return (
-        <View style={styles.container}>
+      if (isAvailable) {
+        const subscription = Pedometer.watchStepCount(result => {
+          setStepCount(result.steps);
+        });
 
-            <View style={styles.textoYBotonContainer}>
-            <Text style={styles.titulo}>marcapasos</Text>
-            </View>
-        </View>
-    );
+        return () => {
+          subscription.remove();
+        };
+      }
+    };
+
+    startPedometer();
+  }, []);
+
+  if (isPedometerAvailable === 'checking') {
+    return <Text>Comprobando disponibilidad del podómetro...</Text>;
+  }
+
+  if (isPedometerAvailable === 'unavailable') {
+    return <Text>El podómetro no está disponible en este dispositivo.</Text>;
+  }
+
+  return (
+    <View style={styles.container}>
+      <Text style={styles.text}>Pasos: {stepCount}</Text>
+    </View>
+  );
 };
 
-
-
 const styles = StyleSheet.create({
-    container: {
-    },
-    containerImagen:
-    {
-
-    },
-    textoYBotonContainer: {
-        marginTop: 60,         
-        alignItems: 'center',  
-      },
-      titulo: {
-        fontSize: 24,           
-        fontWeight: 'bold',   
-        marginBottom: 10,      
-        textAlign: 'center',    
-      },
-      tamañoBoton:
-      {
-        width: 350,   // Ancho del botón
-        height: 63,   // Alto del botón
-      }
+  container: {
+    padding: 20,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  text: {
+    fontSize: 24,
+    fontWeight: 'bold',
+  },
 });
 
-export default Start;
+export default PedometerCounter;
