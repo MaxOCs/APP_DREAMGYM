@@ -6,21 +6,24 @@ import LottieView from 'lottie-react-native';
 
 const { width, height } = Dimensions.get('window');
 
-const handleHome = () => { //areglar esto!!!!!!
-    const navigation = useNavigation();
-    navigation.navigate('Principal');
-}
 
-const LottieAnimations = () => {
+
+const LottieAnimations = ({navigation,route}) => {
+
+    const nombre = route.params.nombreUsuario;
+
+    const handleHome = () => { //areglar esto!!!!!!
+        navigation.navigate('Principal', { screen: 'Inicio',params:{nombreUsuario:nombre}});
+    }
+
     return (
         <View style={styles.contenedor}>
             <Onboarding
-                onDone={handleHome}                                    
-                onSkip={handleHome}
+                onDone = {handleHome}
                 containerStyles={{ paddingHorizontal: 15 }}
                 pages={[
                     {
-                        backgroundColor: '#fff',
+                        backgroundColor: '#32C76F',
                         image: (
                             <View style={styles.lottie}>
                                 <LottieView style={{flex:1}}
@@ -34,7 +37,7 @@ const LottieAnimations = () => {
                         subtitle: 'Felicidades, nos alegra tenerte con nosotros!',
                     },
                     {
-                        backgroundColor: '#fff',
+                        backgroundColor: '#E84DE1',
                         image: (
                             <View style={styles.lottie}>
                                 <LottieView style={{flex:1}}
@@ -48,7 +51,7 @@ const LottieAnimations = () => {
                         subtitle: 'Recuerda que podrás registrar tu Historial en el apartado de IMC',
                     },
                     {
-                        backgroundColor: '#fff',
+                        backgroundColor: '#4DB7E8',
                         image: (
                             <View style={styles.lottie}>
                                 <LottieView style={{flex:1}}

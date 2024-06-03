@@ -42,13 +42,9 @@ const Registro = ({ navigation }) => {
       });
   
       if (response.ok) {
-        Toast.show({
-          type: 'success',
-          text1: 'Disfruta de tus entrenamientos',
-        });
-        setTimeout(() => {
+        
           navigation.navigate('Bienvenido');
-        }, 1000);
+
       } else {
         const errorData = await response.json();
         setError(errorData.error || 'Error en el registro');
