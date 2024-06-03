@@ -3,11 +3,12 @@ import { Text, View, StyleSheet, PermissionsAndroid, Alert, TouchableOpacity } f
 import { Camera, useCameraDevice } from 'react-native-vision-camera';
 import { CameraRoll } from '@react-native-camera-roll/camera-roll';
 
-const CamaraFisico = ({ navigation }) => {
+const CamaraFisico = ({ navigation, route }) => {
   const camera = useRef(null);
   const device = useCameraDevice('back');
   const [hasPermission, setHasPermission] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const [fotosTomadas, setFotosTomadas] = useState([]);
 
   const requestCameraPermission = async () => {
     try {
@@ -43,8 +44,10 @@ const CamaraFisico = ({ navigation }) => {
       const savedPhotoUri = await CameraRoll.save(`file://${file.path}`, {
         type: 'photo',
       });
-      // Retorna la URI de la foto a la pantalla anterior
-      navigation.navigate('Registro', { fotoUri: savedPhotoUri });
+      setFotosTomadas([...fotosTomadas, savedPhotoUri]);
+      navigation.navigate('CambioFisico', { fotoUri: savedPhotoUri});
+
+
     } catch (error) {
       console.error('Error al tomar foto:', error);
     }

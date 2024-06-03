@@ -16,6 +16,12 @@ import marcaPasos from "../views/MarcaPasos";
 import { createDrawerNavigator, DrawerContentScrollView, DrawerItemList, DrawerItem } from '@react-navigation/drawer';
 import colors from "../styles/colores";
 import HistorialIMC from "../views/HistorialIMC";
+import CambioFisico from "../views/CambioFisico";
+import CamaraFisico from "../views/CamaraFisico";
+import HistorialCambioFisico from "../views/HistorialCambioFisico";
+
+
+
 import Toast from 'react-native-toast-message';
 
 const Stack = createNativeStackNavigator()
@@ -107,6 +113,21 @@ const MainStack = () => {
                 <Stack.Screen
                     name="Camara"
                     component={camara}
+                    options={{ headerShown: false }}
+                />
+                 <Stack.Screen
+                    name="CambioFisico"
+                    component={CambioFisico}
+                    options={{ headerShown: false }}
+                />
+                <Stack.Screen
+                    name="CamaraFisico"
+                    component={CamaraFisico}
+                    options={{ headerShown: false }}
+                />
+                <Stack.Screen
+                    name="HistorialCambioFisico"
+                    component={HistorialCambioFisico}
                     options={{ headerShown: false }}
                 />
                 

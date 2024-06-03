@@ -16,6 +16,8 @@ const SliderItem = ({ navigation, nombreUsuario }) => {
         { id: '3', text: 'Nuevo I.M.C', screen: 'IMC', params: {nombreUsuario}},
         { id: '4', text: 'Cardio', screen: 'marcapasos'},
         { id: '5', text: 'Mi historial IMC', screen: 'historialimc', params: {nombreUsuario}},
+        { id: '6', text: 'Mi cambio fisico', screen: 'CambioFisico', params: {nombreUsuario}},
+
     ];
 
     //HANDLE PARA NAVEGAR ENTRE PANTALLAS Y OBTENER EL PARAMETRO
