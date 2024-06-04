@@ -14,8 +14,9 @@ const SliderItem = ({ navigation, nombreUsuario }) => {
         { id: '1', text: 'FUERZA', screen: 'Nivel', category: 'Fuerza'},
         { id: '2', text: 'HIPERTROFIA', screen: 'Nivel', category: 'Hipertrofia'},
         { id: '3', text: 'Nuevo I.M.C', screen: 'IMC', params: {nombreUsuario}},
-        { id: '4', text: 'Cardio', screen: 'marcapasos'},
+        { id: '4', text: 'Cardio', screen: 'MarcaPasos'},
         { id: '5', text: 'Mi historial IMC', screen: 'historialimc', params: {nombreUsuario}},
+        { id: '6', text: 'Mi cambio fisico', screen: 'CambioFisico', params: {nombreUsuario}},
     ];
 
     //HANDLE PARA NAVEGAR ENTRE PANTALLAS Y OBTENER EL PARAMETRO

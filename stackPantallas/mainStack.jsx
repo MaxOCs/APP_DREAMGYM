@@ -17,6 +17,10 @@ import { createDrawerNavigator, DrawerContentScrollView, DrawerItemList, DrawerI
 import colors from "../styles/colores";
 import HistorialIMC from "../views/HistorialIMC";
 import Toast from 'react-native-toast-message';
+import CambioFisico from "../views/CambioFisico";
+import CamaraFisico from "../views/CamaraFisico";
+import HistorialCambioFisico from "../views/HistorialCambioFisico";
+
 
 const Stack = createNativeStackNavigator()
 const Drawer = createDrawerNavigator()
@@ -95,7 +99,7 @@ const MainStack = () => {
                     options={{ headerShown: false }}
                 />
                 <Stack.Screen
-                    name="marcapasos"
+                    name="MarcaPasos"
                     component={marcaPasos}
                     options={{ headerShown: false }}
                 />
@@ -115,7 +119,23 @@ const MainStack = () => {
                     component={LottieAnimations}
                     options={{ headerShown: false }}
                 />
+                   <Stack.Screen
+                    name="CambioFisico"
+                    component={CambioFisico}
+                    options={{ headerShown: false }}
+                />
+                <Stack.Screen
+                    name="CamaraFisico"
+                    component={CamaraFisico}
+                    options={{ headerShown: false }}
+                />
+                <Stack.Screen
+                    name="HistorialCambioFisico"
+                    component={HistorialCambioFisico}
+                    options={{ headerShown: false }}
+                />
             </Stack.Navigator>
+            <Toast/>
         </NavigationContainer>
     );
 }

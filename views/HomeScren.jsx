@@ -93,7 +93,7 @@ const HomeScreen = ({ navigation }) => {
         Registrarme
       </Text>
       <BotonPrincipal 
-        onPress={handleLottie} // aqui se debe llamar el incio de sesion 
+        onPress={handleLogin} // aqui se debe llamar el incio de sesion 
         title="Iniciar sesión"  
       />
       {error && <Text style={{ color: 'red' }}>{error}</Text>}

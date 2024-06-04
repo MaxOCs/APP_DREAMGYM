@@ -60,18 +60,17 @@ const Registro = ({ navigation }) => {
     const obtenerUltimaFoto = async () => {
       try {
         // Obtener las últimas fotos del rollo de la cámara
-        const fotos = await CameraRoll.getPhotos({ first: 1, assetType: 'Photos' });
-  
+        const fotos = await CameraRoll.getPhotos({ first: 1, assetType: 'Photos' })
         // Verificar si se encontraron fotos
         if (fotos.edges.length > 0) {
           // Obtener la última foto de la lista de fotos
           const ultimaFoto = fotos.edges[0].node.image.uri;
           setUltimaFoto(ultimaFoto);
-          // Verificar si se debe actualizar la imagen
+          //Verificar si se debe actualizar la imagen
           if (takefoto) {
             setImagen(ultimaFoto);
             setfoto(ultimaFoto);
-            // Restablecer takefoto a false después de actualizar la imagen
+            //Restablecer takefoto a false después de actualizar la imagen
             setTakeFoto(false);
             console.log('la ruta de la foto es esta:'+ ultimaFoto.toString());
           }
