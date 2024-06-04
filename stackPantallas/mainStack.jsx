@@ -28,6 +28,7 @@ const Stack = createNativeStackNavigator()
 const Drawer = createDrawerNavigator()
 
 const CustomDrawerContent = (props) => {
+
     return (
         <DrawerContentScrollView {...props}>
             <DrawerItemList {...props} />
@@ -40,7 +41,6 @@ const CustomDrawerContent = (props) => {
             <DrawerItem
                 label="Cerrar sesión"
                 onPress={() => {
-                    // Metodo para cerrar sesion
                 }}
             />
         </DrawerContentScrollView>
@@ -137,7 +137,6 @@ const MainStack = () => {
                     options={{ headerShown: false }}
                 />
             </Stack.Navigator>
-            <Toast/>
         </NavigationContainer>
     );
 }

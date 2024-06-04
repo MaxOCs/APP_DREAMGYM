@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, Dimensions } from 'react-native';
 import axios from 'axios';
 import ImagenesComponente from "../componentes/Imagenes";
 import webservice from "../webservice/rutaweb";
 import BotonPrincipal from "../componentes/botonPrincipal";
+import BackComponet from '../componentes/BackComponet';
+
+const {width,height} = Dimensions.get("screen")
 
 const Start = ({ route, navigation }) => {
     const { category, level } = route.params || {};
@@ -11,6 +14,8 @@ const Start = ({ route, navigation }) => {
     const [idCategoria, setIdCategoria] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+
+    
 
     useEffect(() => {
        
@@ -53,8 +58,9 @@ const Start = ({ route, navigation }) => {
 
     return (
         <View style={styles.container}>
+            <BackComponet navigation={navigation}></BackComponet>
             <View>
-            <ImagenesComponente uri={imageUrl} width={400} height={450} />
+            <ImagenesComponente uri={imageUrl} style={styles.imagen}/>
             </View>
             <View style={styles.textoYBotonContainer}>
             <Text style={styles.titulo}>{titulo}</Text>
@@ -111,6 +117,10 @@ const styles = StyleSheet.create({
       {
         width: 350,   // Ancho del botón
         height: 63,   // Alto del botón
+      },
+      imagen:{
+        width: width,
+        height: width*0.9,
       }
 });
 
