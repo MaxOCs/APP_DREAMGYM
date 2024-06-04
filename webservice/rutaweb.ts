@@ -1,2 +1,2 @@
-const webservice = "http://192.168.0.6/GymAplication/public";
+const webservice = "http://192.168.0.29/GymAplication/public";
 export default webservice;

@@ -8,3 +8,8 @@ npm install react-native-linear-gradient
 npm i react-native-vision-camera
 npm install @react-native-camera-roll/camera-roll --save
 npm i react-native-onboarding-swiper
+
+
+npm install react-native-image-picker
+
+npm install react-native-fs
