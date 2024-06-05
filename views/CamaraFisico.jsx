@@ -2,14 +2,14 @@ import React, { useRef, useEffect, useState } from 'react';
 import { Text, View, StyleSheet, PermissionsAndroid, Alert, TouchableOpacity } from 'react-native';
 import { Camera, useCameraDevice } from 'react-native-vision-camera';
 import { CameraRoll } from '@react-native-camera-roll/camera-roll';
-import axios from 'axios';
-import RNFS from 'react-native-fs';
 
-const CamaraFisico = ({ navigation }) => {
+const CamaraFisico = ({ navigation, route }) => {
+  const { nombreUsuario } = route.params;
   const camera = useRef(null);
   const device = useCameraDevice('back');
   const [hasPermission, setHasPermission] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const [fotosTomadas, setFotosTomadas] = useState([]);
 
   const requestCameraPermission = async () => {
     try {
@@ -39,24 +39,18 @@ const CamaraFisico = ({ navigation }) => {
     requestCameraPermission();
   }, []);
 
-  const tomarFoto = async () => {
+  const TomarFoto = async () => {
     try {
       const file = await camera.current.takePhoto();
+      await CameraRoll.saveAsset(`file://${file.path}`, {
+        type: 'photo',
+      });
       const savedPhotoUri = await CameraRoll.save(`file://${file.path}`, {
         type: 'photo',
       });
+      setFotosTomadas([...fotosTomadas, savedPhotoUri]);
+      navigation.navigate('CambioFisico', { fotoUri: savedPhotoUri, nombreUsuario:nombreUsuario});
 
-      // Leer el archivo y convertirlo a base64
-      const filePath = `file://${file.path}`;
-      const base64Image = await RNFS.readFile(filePath, 'base64');
-
-      // Enviar la imagen al servidor usando una solicitud POST
-      const response = await axios.post('https://10.73.126.103/GymAplication/public/guardarfoto', {
-        image: base64Image,
-      });
-
-      console.log('Respuesta del servidor:', response.data);
-      navigation.navigate('CambioFisico', { fotoUri: savedPhotoUri });
 
     } catch (error) {
       console.error('Error al tomar foto:', error);
@@ -76,7 +70,7 @@ const CamaraFisico = ({ navigation }) => {
         isActive={true}
         ref={camera}
       />
-      <TouchableOpacity style={styles.captureButton} onPress={tomarFoto}>
+      <TouchableOpacity style={styles.captureButton} onPress={TomarFoto}>
         <View style={styles.captureButtonInner} />
       </TouchableOpacity>
     </View>

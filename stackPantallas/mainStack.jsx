@@ -137,6 +137,7 @@ const MainStack = () => {
                     options={{ headerShown: false }}
                 />
             </Stack.Navigator>
+            <Toast/>
         </NavigationContainer>
     );
 }

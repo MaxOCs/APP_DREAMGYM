@@ -1,51 +1,101 @@
 import React, { useEffect, useState } from 'react';
-import { View, StyleSheet, FlatList, Image, Text, Platform } from 'react-native';
-import CameraRoll from '@react-native-camera-roll/camera-roll';
-import colors from '../styles/colores';
+import { View, StyleSheet, Image, Text, FlatList } from 'react-native';
+import axios from 'axios';
+import webservice from '../webservice/rutaweb';
 
 const HistorialCambioFisico = ({ route }) => {
   const { nombreUsuario } = route.params;
-  const [fotosTomadas, setFotosTomadas] = useState([]);
+  const [FotosHistorial, setFotosHistorial] = useState([]);
+  const [loadingFoto, setLoadingFoto] = useState(true);
+  const [errorFoto, setErrorFoto] = useState(null);
+  const urlfotohistotial = `${webservice}/fotos/historial/1`;
 
   useEffect(() => {
-    const obtenerFotos = async () => {
-      if (Platform.OS === 'android') {
-        // Aquí puedes omitir la solicitud de permisos si estás seguro de que ya están otorgados
-      }
+    const fetchHistoralfotos = async () => {
       try {
-        const fotos = await CameraRoll.getPhotos({ first: 20, assetType: 'Photos' });
-        if (fotos.edges.length > 0) {
-          const uris = fotos.edges.map(edge => edge.node.image.uri);
-          setFotosTomadas(uris);
-        }
+        const response = await axios.get(urlfotohistotial);
+        console.log(response.data); 
+        setFotosHistorial(response.data.foto); //para acceder al arreglo
       } catch (error) {
-        console.error('Error al obtener las fotos:', error);
+        console.error(error);
+        setErrorFoto('Error al cargar los datos');
+      } finally {
+        setLoadingFoto(false);
       }
     };
 
-    obtenerFotos();
+    fetchHistoralfotos();
   }, []);
 
-  return (
-    <View style={styles.container}>
-      <Text style={{ color: colors.Primaryblue, fontSize: 20 }}>Mi historial cambio físico</Text>
-      <FlatList
-        data={fotosTomadas}
-        renderItem={({ item }) => (
-          <Image source={{ uri: item }} style={{ width: 200, height: 200, margin: 10 }} />
-        )}
-        keyExtractor={(item, index) => index.toString()}
+  // Aqui para renderizar
+  const renderItem = ({ item, index }) => (
+    <View style={styles.userContainer}>
+      <Text style={styles.date}>Fecha: {item.fecha}</Text>
+      <Image
+        source={{ uri: item.foto }}
+        style={styles.image}
       />
+    </View>
+  );
+
+  return (
+    <View>
+      <Text style={styles.text}>Historial de mi cambio fisico</Text>
+    <FlatList
+      data={FotosHistorial}
+      renderItem={renderItem}
+      keyExtractor={(item, index) => index.toString()}
+      contentContainerStyle={styles.container}
+      ListEmptyComponent={() => (
+        <View style={styles.container}>
+          {loadingFoto ? <Text>Cargando...</Text> : <Text>No hay datos disponibles</Text>}
+        </View>
+      )}
+    />
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flexGrow: 1,
     justifyContent: 'center',
     alignItems: 'center',
     marginBottom: 50,
+  },
+  text: {
+    fontSize: 28,
+    textAlign: 'center',
+    marginTop: 20,
+    marginBottom: 20,
+    fontWeight: 'bold',
+    color: 'blue',
+  },
+  image: {
+    width: 350,
+    height: 300,
+    marginVertical: 10,
+  },
+  userContainer: {
+    marginBottom: 30,
+    alignItems: 'center',
+    backgroundColor: '#fff',
+    borderRadius: 8,
+    borderWidth: 1,
+    borderColor: '#ddd',
+    marginVertical: 8,
+    marginHorizontal: 16,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.3,
+    shadowRadius: 4,
+    elevation: 5,
+
+  },
+  date: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: 'black',
   },
 });
 

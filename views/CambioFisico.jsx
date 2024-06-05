@@ -64,14 +64,14 @@ const CambioFisico = ({ navigation, route }) => {
   };
 
   const handleCamara = () => {
-    navigation.navigate('CamaraFisico'); // Navegar a la pantalla de la cámara correctamente
+    navigation.navigate('CamaraFisico',{nombreUsuario:nombreUsuario}); // Navegar a la pantalla de la cámara correctamente
   };
 
   return (
     <View style={styles.container}>
       <Text style={styles.titulo}>Tu cambio físico</Text>
       <Text style={styles.descripcion}>A lo largo del tiempo</Text>
-      <Text style={styles.descripcion2} onPress={() => navigation.navigate("HistorialCambioFisico", {fotosTomadas:fotosTomadas})}>Ver mi historial</Text>
+      <Text style={styles.descripcion2} onPress={() => navigation.navigate("HistorialCambioFisico", {nombreUsuario:nombreUsuario})}>Ver mi historial</Text>
       <BotonPrincipal onPress={handleCamara} title="Tomar nueva foto" />
       <BotonPrincipal onPress={handleRegistroTransformacion} title="Guardar transformación" />
       {error && <Text style={styles.error}>{error}</Text>}
