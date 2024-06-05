@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Text, TextInput, StyleSheet, View,TouchableOpacity,Image } from 'react-native';
 import webservice from '../webservice/rutaweb'
 import BotonPrincipal from '../componentes/botonPrincipal';
-import { Avatar,Icon } from '@rneui/base';
+import { Avatar,Icon, color } from '@rneui/base';
 import { CameraRoll } from '@react-native-camera-roll/camera-roll';
 import Toast from 'react-native-toast-message';
 
@@ -93,6 +93,7 @@ const Registro = ({ navigation }) => {
   
   return (
     <View style={styles.container}>
+      <Text style={styles.titulo}>Registro</Text>
       <TouchableOpacity style={styles.avatarContainer} onPress={hadleCamara}>
         <Avatar
           size={68}
@@ -107,7 +108,7 @@ const Registro = ({ navigation }) => {
       <View style={styles.formulario}>
         <Image source={require('../src/user.png')} style={styles.icono} />
         <TextInput
-          placeholder='Ingresa tu nombre completo'
+          placeholder='Ingresa un nombre de usuario'
           style={styles.input}
           value={nombre}
           onChangeText={setNombre}
@@ -120,7 +121,7 @@ const Registro = ({ navigation }) => {
           containerStyle={styles.icono}
         />
         <TextInput
-          placeholder='Contraseña'
+          placeholder='Ingresa una contraseña'
           style={styles.input}
           secureTextEntry={true}
           value={password}
@@ -173,6 +174,15 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     marginTop: 10,
   },
+  titulo:
+  {
+    fontSize: 40,
+    color: 'blue',
+    textAlign: 'center',
+    marginBottom: 50,
+    color: '#5C84FF',
+    fontWeight: 'bold',
+  }
 });
 
 export default Registro;
