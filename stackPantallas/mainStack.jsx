@@ -1,6 +1,6 @@
 import React from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { NavigationContainer } from "@react-navigation/native";
+import { NavigationContainer,useNavigation } from "@react-navigation/native";
 import HomeScreen from "../views/HomeScren";
 import Login from "../views/Registro";
 import Registro from "../views/Registro";
@@ -26,20 +26,18 @@ const Stack = createNativeStackNavigator()
 const Drawer = createDrawerNavigator()
 
 const CustomDrawerContent = (props) => {
+    const navigation = useNavigation();
+    const salir = () => {
 
+        navigation.navigate('Bienvenido');
+    };
     return (
         <DrawerContentScrollView {...props}>
             <DrawerItemList {...props} />
             <DrawerItem
-                label="Perfil"
-                onPress={() => {
-                    // accion ir a la pantalla perfil
-                }}
-            />
-            <DrawerItem
                 label="Cerrar sesión"
-                onPress={() => {
-                }}
+                onPress={salir
+                }
             />
         </DrawerContentScrollView>
     );

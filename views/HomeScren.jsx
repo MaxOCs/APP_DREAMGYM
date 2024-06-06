@@ -58,7 +58,7 @@ const HomeScreen = ({ navigation }) => {
         console.log('Valor de nombre antes de navegar:', nombre);
   
         if (response.ok) {
-          handleNavigation('Principal', { screen: 'Inicio',params:{nombreUsuario:nombre}}); //enviar el nombre del Usuario 
+          handleLottie() //enviar el nombre del Usuario 
         } else {
           const errorData = await response.json();
           setError(errorData.error || 'Error en el registro');
@@ -93,7 +93,7 @@ const HomeScreen = ({ navigation }) => {
         Registrarme
       </Text>
       <BotonPrincipal 
-        onPress={handleLogin} // aqui se debe llamar el incio de sesion 
+        onPress={handleLogin2} // aqui se debe llamar el incio de sesion 
         title="Iniciar sesión"  
       />
       {error && <Text style={{ color: 'red' }}>{error}</Text>}
