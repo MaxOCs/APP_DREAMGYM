@@ -5,6 +5,7 @@ import InputText from '../componentes/InputText';
 import colors from '../styles/colores';
 import axios from 'axios';
 import webservice from '../webservice/rutaweb';
+import Toast from 'react-native-toast-message';
 
 const NuevoIMC = ({ route }) => {
   const { nombreUsuario } = route.params;
@@ -21,8 +22,6 @@ const NuevoIMC = ({ route }) => {
         const response = await axios.get(`${webservice}/userIngresado/${nombreUsuario}`);
         setUserIngresado(response.data.usuario);
       } catch (error) {
-        console.error('Error al obtener el ID de usuario:', error);
-        setError('Error al obtener el ID de usuario');
       }
     };
     getUser();
@@ -43,6 +42,9 @@ const NuevoIMC = ({ route }) => {
 
   // METODO PARA REGISTRAR EL IMC
   const registrarIMC = async () => {
+
+    
+
     try {
       const response = await axios.get(`${webservice}/registroIMC/${userIngresado}`, {
         params: {
@@ -50,11 +52,18 @@ const NuevoIMC = ({ route }) => {
           peso: peso,
           imc: resultado,
         },
+        
       });
-      console.log('IMC registrado correctamente:', response.data);
-    } catch (error) {
-      console.error('Error al registrar el IMC:', error);
-      Alert.alert('Error', 'Error al registrar el IMC. Intenta nuevamente.'); //ALERTA PAL ERROR
+        
+      if (response.status === 200) {
+        Toast.show({
+          type: 'success',
+          text1: 'Registro exitoso',
+        });
+      }
+      
+    } 
+    catch (error) {
     }
   };
 
@@ -63,7 +72,7 @@ const NuevoIMC = ({ route }) => {
     calcularIMC();
     setTimeout(() => {
       registrarIMC();
-    }, 1000); 
+    }, 500); 
   };
 
   return (

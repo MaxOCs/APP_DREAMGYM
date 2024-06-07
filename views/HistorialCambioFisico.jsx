@@ -6,7 +6,7 @@ import webservice from '../webservice/rutaweb';
 const HistorialCambioFisico = ({ route }) => {
   const {nombreUsuario} = route.params
   const [FotosHistorial, setFotosHistorial] = useState([]);
-  const urlfotohistotial = `${webservice}/fotos/historial/1`;
+  const urlfotohistotial = `${webservice}/fotos/historial/8`;
   const [loadingFoto, setLoadingFoto] = useState(true);
 
   useEffect(() => {

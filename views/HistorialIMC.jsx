@@ -66,7 +66,7 @@ const HistorialIMC = ({ route }) => {
               <Text style={styles.itemText}>Altura: {item.altura}</Text>
               <Text style={styles.itemText}>Peso: {item.peso}</Text>
               <Text style={styles.itemText}>IMC: {item.imc}</Text>
-              <Text style={styles.itemText}>IMC: {item.created_at}</Text>
+              <Text style={styles.itemText}>Fecha: {item.created_at}</Text>
 
             </View>
           ))}

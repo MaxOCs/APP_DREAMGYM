@@ -42,8 +42,13 @@ const Registro = ({ navigation }) => {
       });
   
       if (response.ok) {
-        
+        Toast.show({
+          type: 'success',
+          text1: 'Registro exitoso',
+        });
+        setTimeout(() => {
           navigation.navigate('Bienvenido');
+        }, 1000); 
 
       } else {
         const errorData = await response.json();
